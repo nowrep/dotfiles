@@ -90,7 +90,7 @@ function cdbuild {
 }
 
 function backuphome {
-    cd /home/david
+    cd
     tar -cvJ \
         --exclude '*.o' \
         --exclude '.git/*' \
@@ -211,16 +211,16 @@ function xbox-ps3 {
 
 function shares-start {
     sudo systemctl start vsftpd
-    sudo mount --bind /media/Internal/Torrents /home/david/Veřejné/Shares/Videos/Torrents
-    sudo mount --bind /media/Internal/Videa /home/david/Veřejné/Shares/Videos/Videa
-    sudo mount --bind /home/david/Music /home/david/Veřejné/Shares/Music
+    sudo mount --bind /media/Internal/Torrents ~/Veřejné/Shares/Videos/Torrents
+    sudo mount --bind /media/Internal/Videa ~/Veřejné/Shares/Videos/Videa
+    sudo mount --bind ~/Music ~/Veřejné/Shares/Music
 }
 
 function shares-stop {
     sudo systemctl stop vsftpd
-    sudo umount /home/david/Veřejné/Shares/Videos/Torrents
-    sudo umount /home/david/Veřejné/Shares/Videos/Videa
-    sudo umount /home/david/Veřejné/Shares/Music
+    sudo umount ~/Veřejné/Shares/Videos/Torrents
+    sudo umount ~/Veřejné/Shares/Videos/Videa
+    sudo umount ~/Veřejné/Shares/Music
 }
 
 function vita-env {

@@ -4,7 +4,7 @@
 -- keyname script_binding auto_load_subs
 local utils = require 'mp.utils'
 function load_sub_fn()
-    subl = "/home/david/.config/mpv/scripts/OpenSubtitlesDownload.py"
+    subl = os.getenv("HOME") .. "/.config/mpv/scripts/OpenSubtitlesDownload.py"
     mp.msg.info("Searching subtitle")
     mp.osd_message("Searching subtitle")
     t = {}
