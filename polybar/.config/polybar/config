@@ -31,17 +31,17 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = #f00
 
-border-size = 3
+border-size = 2
 border-color = #00000000
 
-padding-left = 0
-padding-right = 2
+padding-left = 1
+padding-right = 1
 
-module-margin-left = 5
+module-margin-left = 2
 module-margin-right = 1
 
-font-0 = Noto Sans:size=10.5;2
-font-1 = Knack Nerd Font:size=10.5;2
+font-0 = Knack Nerd Font:size=10.5;2
+font-1 = Noto Sans:size=10.5;2
 font-2 = Weather Icons:size=12;2
 
 modules-left = i3 mpd-tail openweathermap-simple
@@ -66,16 +66,14 @@ scroll-down = i3wm-wsprev
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:150:...%
+label-font = 2
 
 [module/xkeyboard]
 type = internal/xkeyboard
 blacklist-0 = num lock
 
+format-prefix = "  "
 label-layout = %layout%
-
-label-indicator-padding = 2
-label-indicator-margin = 1
-label-indicator-background = ${colors.secondary}
 
 [module/i3]
 type = internal/i3
@@ -99,29 +97,27 @@ label-mode-foreground = #000
 label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
-label-focused = %icon:4%
-label-focused-font = 2
+label-focused = %icon%
 label-focused-foreground = ${colors.primary}
 ; label-focused-background = ${colors.background-alt}
 ; label-focused-underline= ${colors.primary}
-label-focused-padding = 2
+label-focused-padding = 1
 
 ; unfocused = Inactive workspace on any monitor
-label-unfocused = %icon:4%
-label-unfocused-font = 2
-label-unfocused-padding = 2
+label-unfocused = %icon%
+label-unfocused-padding = 1
 
 ; urgent = Workspace with urgency hint set
-label-urgent = %icon:4%
-label-urgent-font = 2
+label-urgent = %icon%
 label-urgent-foreground = ${colors.alert}
-label-urgent-padding = 2
+label-urgent-padding = 1
 
 [module/mpd-tail]
 type = custom/script
 exec = ~/.config/polybar/mpd-tail.sh
-format-prefix = "  "
 tail = true
+label-font = 2
+format-prefix = " "
 
 [module/openweathermap-simple]
 type = custom/script
@@ -155,7 +151,7 @@ card = intel_backlight
 type = internal/cpu
 interval = 2
 format-prefix = " "
-label = %percentage%%
+label = %percentage:2%%
 
 [module/memory]
 type = internal/memory
