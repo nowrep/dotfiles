@@ -1,0 +1,5 @@
+.lvimrc
+.clang
+.ycm_extra_conf.py
+.qmake.stash
+compile_commands.json

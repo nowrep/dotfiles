@@ -1,0 +1,44 @@
+[user]
+name = David Rosca
+email = nowrep@gmail.com
+signingkey = EBC3FC294452C6D8
+
+[core]
+excludesfile = ~/.config/git/gitignore
+
+[color]
+ui = auto
+
+[alias]
+br = branch
+st = status
+hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+up = pull --rebase --autostash
+
+[commit]
+gpgsign = true
+
+[push]
+default = matching
+
+[diff]
+compactionHeuristic = true
+
+[diff]
+tool = nvimdiff
+
+[difftool "nvimdiff"]
+cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+
+[merge]
+tool = nvimmerge
+conflictstyle = diff3
+
+[mergetool "nvimmerge"]
+cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c '3 $wincmd l' -c 'wincmd J'"
+
+[url "git@git.kde.org:"]
+insteadOf = kde:
+pushInsteadOf = kde:
+[url "git://anongit.kde.org/"]
+insteadOf = kde:
