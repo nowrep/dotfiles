@@ -1,5 +1,5 @@
 [global]
-font = Knack Nerd Font 9
+font = Noto Sans 9
 markup = yes
 
 # The format of the message.  Possible variables are:
