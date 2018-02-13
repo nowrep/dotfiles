@@ -153,6 +153,17 @@ let g:neomake_bearmakegcc_maker =
                 \ '%-Gg++ %.%#,'
 \ }
 
+" Show build status in airline
+augroup my_neomake_hooks
+    au!
+    autocmd User NeomakeJobStarted let g:neomake_build_running = 1
+    autocmd User NeomakeJobFinished let g:neomake_build_running = 0
+    autocmd VimEnter * let g:airline_section_error = airline#section#create(['neomake_error_count', 'neomake_build_running'])
+augroup END
+let g:neomake_build_running = 0
+call airline#parts#define_text('neomake_build_running', '  ')
+call airline#parts#define_condition('neomake_build_running', 'g:neomake_build_running == 1')
+
 " vim-easymotion
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
