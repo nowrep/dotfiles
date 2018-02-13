@@ -49,6 +49,8 @@ export PATH="/usr/lib/ccache/bin/:$PATH"
 export GPG_TTY=$(tty)
 
 # Aliases
+alias ls="exa"
+alias ll="ls -l"
 alias monitor_off="xset dpms force off"
 alias grep="grep --color=auto --line-number"
 alias cdq="cd ~/Programming/Qt-C++/QupZilla"
@@ -239,9 +241,6 @@ function android-env {
     export ANDROID_NDK_ROOT=/media/Internal/Android/android-ndk-r15c
     export PATH=/media/Internal/Android/Qt-5.9.2/5.9.2/android_armv7/bin:$PATH
 }
-
-# Set Solarized ls colors
-eval `dircolors ~/.dircolors`
 
 # termite
 if [[ $TERM == xterm-termite ]]; then
