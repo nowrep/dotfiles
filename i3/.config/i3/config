@@ -158,8 +158,8 @@ hide_edge_borders smart
 
 # Assignments
 assign [class="Firefox"] $ws1
+assign [class="Thunderbird"] $ws10
 assign [class="konversation"] $ws2
-assign [class="Thunderbird"] $ws9
 
 # Floating
 for_window [class="Pavucontrol"] floating enable
