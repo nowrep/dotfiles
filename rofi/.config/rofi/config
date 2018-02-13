@@ -1,0 +1,6 @@
+rofi.terminal:        termite
+rofi.sidebar-mode:    true
+rofi.theme:           sidestyle.rasi
+rofi.drun-icon-theme: breeze
+rofi.show-icons:      true
+rofi.modi:            window,run,drun
