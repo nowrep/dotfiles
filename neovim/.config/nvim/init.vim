@@ -125,7 +125,7 @@ let g:ctrlp_open_new_file = 'r'
 " vim-localvimrc
 let g:localvimrc_sandbox = 0
 let g:localvimrc_persistent = 2
-let g:localvimrc_persistence_file = '~/.config/nvim/lvimrc_persistent'
+let g:localvimrc_persistence_file = expand('~') . '/.config/nvim/lvimrc_persistent'
 
 " vim-devicons
 let g:webdevicons_enable_nerdtree = 0
@@ -486,7 +486,7 @@ nmap <C-_> gcc
 vmap <C-_> gc
 
 " Neomake
-nnoremap <Leader><C-b> :wa<CR>:Neomake!<CR>
+nnoremap <silent> <Leader><C-b> :wa<CR>:Neomake!<CR>
 
 " Language Server Protocol
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
