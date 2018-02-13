@@ -264,6 +264,10 @@ colorscheme seoul256
 hi Normal guibg=none ctermbg=none
 hi NonText guibg=none ctermbg=none
 hi LineNr guibg=none ctermbg=none
+hi GitGutterAdd guibg=none ctermbg=none
+hi GitGutterChange guibg=none ctermbg=none
+hi GitGutterDelete guibg=none ctermbg=none
+hi GitGutterChangeDelete guibg=none ctermbg=none
 
 " Set zsh as shell
 set shell=/bin/zsh
