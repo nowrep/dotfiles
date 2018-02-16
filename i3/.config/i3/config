@@ -153,13 +153,15 @@ new_window pixel 1
 
 # Gaps
 gaps inner 6
-smart_gaps on
+gaps outer 4
+workspace $ws1 gaps inner 0
+workspace $ws1 gaps outer 0
 hide_edge_borders smart
 
 # Assignments
 assign [class="Firefox"] $ws1
 assign [class="Thunderbird"] $ws10
-assign [class="konversation"] $ws2
+assign [instance="Termite-weechat"] $ws2
 
 # Floating
 for_window [class="Pavucontrol"] floating enable
