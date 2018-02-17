@@ -330,9 +330,6 @@ set sidescroll=1
 " dialogue asking if you wish to save changed files.
 set confirm
 
-" Display right text margin at column 80
-set colorcolumn=80
-
 " Use visual bell instead of beeping when doing something wrong
 set visualbell
 
