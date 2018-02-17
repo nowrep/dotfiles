@@ -7,13 +7,12 @@ CZ_LAYOUT = 0
 US_LAYOUT = 1
 
 cz_window_instances = [
-    "Termite-weechat"
+    "Alacritty-weechat",
 ]
 
 us_window_classes = [
     "krdc",
-    "konsole",
-    "Termite",
+    "Alacritty",
     "assistant", # Qt Assistant
 ]
 

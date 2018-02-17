@@ -4,7 +4,7 @@
 
 # Windows key
 set $mod Mod4
-set $term termite
+set $term alacritty
 
 set $ws1  "1"
 set $ws2  "2"
@@ -161,7 +161,7 @@ hide_edge_borders smart
 # Assignments
 assign [class="Firefox"] $ws1
 assign [class="Thunderbird"] $ws10
-assign [instance="Termite-weechat"] $ws2
+assign [instance="Alacritty-weechat"] $ws2
 
 # Floating
 for_window [class="Pavucontrol"] floating enable
