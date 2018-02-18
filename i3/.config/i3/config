@@ -122,7 +122,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # Start a terminal
-bindsym $mod+Return exec $term
+bindsym $mod+Return exec --no-startup-id $term
 
 # File manager with mod+e
 bindsym $mod+e exec dolphin
@@ -190,6 +190,7 @@ exec_always --no-startup-id ~/.config/i3/keyboard-layout-switcher.py
 exec --no-startup-id ~/.config/i3/pulseaudio-notifier.sh
 exec --no-startup-id compton -b
 exec --no-startup-id redshift
+exec --no-startup-id udiskie
 
 exec --no-startup-id GTK_THEME=Adwaita:dark XDG_DATA_DIRS=~/.local/share/icons/nm-applet:$XDG_DATA_DIRS nm-applet
 exec --no-startup-id /usr/lib/kdeconnectd
