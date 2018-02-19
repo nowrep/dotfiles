@@ -3,3 +3,6 @@
 xset r rate 200 20
 setxkbmap -layout cz,us -option caps:ctrl_modifier,grp:sclk_toggle
 feh --no-fehbg --bg-fill ~/Pictures/YKGPUc9.png
+
+touchpad=`xinput list --name-only | grep TouchPad`
+xinput disable "$touchpad"
