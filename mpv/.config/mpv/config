@@ -2,10 +2,16 @@
 [default]
 
 # Video
-vo = opengl
 hwdec = vaapi
 autofit = 75%x75%
 x11-bypass-compositor = never
+
+# profile = opengl-hq
+scale=lanczos
+dscale=mitchell
+dither-depth=auto
+correct-downscaling=yes
+sigmoid-upscaling=yes
 
 # Audio
 volume = 100
@@ -30,8 +36,7 @@ msg-module = yes
 msg-color = yes
 
 # youtube-dl
-ytdl-format=bestvideo[height<=?1080][fps<=?30]+bestaudio/best
-
+ytdl-format=bestvideo+bestaudio/best
 
 [protocol.https]
 cache=yes
