@@ -8,7 +8,7 @@
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="nowrep"
 
-plugins=(git archlinux colored-man-pages)
+plugins=(git archlinux colored-man-pages safe-paste)
 
 source $ZSH/oh-my-zsh.sh
 
