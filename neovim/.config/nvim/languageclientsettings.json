@@ -1,6 +1,5 @@
 {
     "initializationOptions": {
-        "cacheDirectory": "/tmp/cquery",
-        "indexerCount": 2
+        "cacheDirectory": "/tmp/cquery"
     }
 }

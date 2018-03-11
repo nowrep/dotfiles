@@ -75,7 +75,6 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neopairs.vim'
-Plug 'zchee/deoplete-jedi'
 
 " Games
 Plug 'vim-scripts/TeTrIs.vim'
@@ -146,7 +145,7 @@ let g:neomake_makegcc_maker =
 let g:neomake_bearmakegcc_maker =
 \ {
     \ 'exe': 'bear',
-    \ 'args': ['-a', 'make', '-j4'],
+    \ 'args': ['-a', 'make'],
     \ 'errorformat': neomake#makers#ft#cpp#gcc().errorformat . ',' .
                 \ '%-Gmake%.%#,' .
                 \ '%-Gcd %.%#,' .
@@ -202,20 +201,20 @@ let g:startify_custom_footer =
     \ ]
 
 " Language Server Protocol
-"let g:LanguageClient_serverCommands = {
-"    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-"    \ 'c': ['cquery', '--language-server', '--log-file=/tmp/cquery.log'],
-"    \ 'cpp': ['cquery', '--language-server', '--log-file=/tmp/cquery.log', '--log-stdin-stdout-to-stderr'],
-"\ }
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+    \ 'c': ['cquery', '--log-file=/tmp/cquery.log'],
+    \ 'cpp': ['cquery', '--log-file=/tmp/cquery.log'],
+\ }
 let g:LanguageClient_loadSettings = 1
-let g:LanguageClient_settingsPath = '~/.config/nvim/languageclientsettings.json'
+let g:LanguageClient_settingsPath = expand('~') . '/.config/nvim/languageclientsettings.json'
 
 " Neosnippet
 " let g:neosnippet#disable_runtime_snippets = 1
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
+let g:deoplete#enable_refresh_always = 1
 
 " Echodoc
 let g:echodoc_enable_at_startup = 1

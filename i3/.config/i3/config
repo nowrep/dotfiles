@@ -196,6 +196,5 @@ exec --no-startup-id compton -b
 exec --no-startup-id redshift
 exec --no-startup-id udiskie
 
-exec --no-startup-id GTK_THEME=Adwaita:dark XDG_DATA_DIRS=~/.local/share/icons/nm-applet:$XDG_DATA_DIRS nm-applet
 exec --no-startup-id /usr/lib/kdeconnectd
 exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1

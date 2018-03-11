@@ -42,8 +42,8 @@ alias less=$PAGER
 export FZF_DEFAULT_COMMAND="ag -l"
 export FZF_DEFAULT_OPTS="--preview 'cat {}'"
 
-# ccache
-export PATH="/usr/lib/ccache/bin/:$PATH"
+# make
+export MAKEFLAGS="-j12"
 
 # gpg
 export GPG_TTY=$(tty)
@@ -55,15 +55,15 @@ alias monitor_off="xset dpms force off"
 alias grep="grep --color=auto --line-number"
 alias cdq="cd ~/Programming/Qt-C++/QupZilla"
 alias cdf="cd ~/Programming/Qt-C++/falkon"
-alias cdk="cd /media/Internal/KDE"
+alias cdk="cd /media/Data/KDE"
 alias cds="cd ~/Documents/skola"
 alias cdp="cd ~/Documents/prace"
 alias dmesg="journalctl -b"
 alias diff="colordiff"
 alias valgrind-full="valgrind --leak-check=full --show-reachable=yes --track-origins=yes"
-alias kf5-env="source /media/Internal/KDE/env.sh"
+alias kf5-env="source /media/Data/KDE/env.sh"
 alias callgrind="valgrind --tool=callgrind"
-alias kf5-cmake="cmake .. -DCMAKE_CXX_FLAGS:STRING=-pipe -DCMAKE_INSTALL_PREFIX=/media/Internal/KDE"
+alias kf5-cmake="cmake .. -DCMAKE_CXX_FLAGS:STRING=-pipe -DCMAKE_INSTALL_PREFIX=/media/Data/KDE"
 alias vi='nvim'
 alias vim='nvim'
 alias vimdiff='nvim -d'
@@ -99,7 +99,7 @@ function backuphome {
         --exclude 'build/*' \
         --exclude 'flatpak' \
         --exclude 'Steam' \
-        -f /media/Internal/Backup/backup_`date +%Y%m%d`.tar.xz \
+        -f /media/Data/Backup/backup_`date +%Y%m%d`.tar.xz \
         Documents \
         Pictures \
         Programming \
@@ -213,33 +213,33 @@ function xbox-ps3 {
 
 function shares-start {
     sudo systemctl start vsftpd
-    sudo mount --bind /media/Internal/Torrents ~/Veřejné/Shares/Videos/Torrents
-    sudo mount --bind /media/Internal/Videa ~/Veřejné/Shares/Videos/Videa
-    sudo mount --bind ~/Music ~/Veřejné/Shares/Music
+    sudo mount --bind /media/Data/Torrents ~/Shares/ftp/Videos/Torrents
+    sudo mount --bind /media/Data/Videa ~/Shares/ftp/Videos/Videa
+    sudo mount --bind ~/Music ~/Shares/ftp/Music
 }
 
 function shares-stop {
     sudo systemctl stop vsftpd
-    sudo umount ~/Veřejné/Shares/Videos/Torrents
-    sudo umount ~/Veřejné/Shares/Videos/Videa
-    sudo umount ~/Veřejné/Shares/Music
+    sudo umount ~/Shares/ftp/Videos/Torrents
+    sudo umount ~/Shares/ftp/Videos/Videa
+    sudo umount ~/Shares/ftp/Music
 }
 
 function vita-env {
-    export VITASDK=/media/Internal/Vita/SDK/vitasdk
+    export VITASDK=/media/Data/Vita/SDK/vitasdk
     export PATH=$VITASDK/bin:$PATH
 }
 
 function 3ds-env {
-    export DEVKITPRO=/media/Internal/3DS/SDK
+    export DEVKITPRO=/media/Data/3DS/SDK
     export DEVKITARM=$DEVKITPRO/devkitARM
-    export PATH=$PATH:$DEVKITARM/bin:/media/Internal/3DS/tools
+    export PATH=$PATH:$DEVKITARM/bin:/media/Data/3DS/tools
 }
 
 function android-env {
-    export ANDROID_SDK_ROOT=/media/Internal/Android/Sdk
-    export ANDROID_NDK_ROOT=/media/Internal/Android/android-ndk-r15c
-    export PATH=/media/Internal/Android/Qt-5.9.2/5.9.2/android_armv7/bin:$PATH
+    export ANDROID_SDK_ROOT=/media/Data/Android/Sdk
+    export ANDROID_NDK_ROOT=/media/Data/Android/android-ndk-r15c
+    export PATH=/media/Data/Android/Qt-5.9.2/5.9.2/android_armv7/bin:$PATH
 }
 
 # termite
