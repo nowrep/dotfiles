@@ -118,7 +118,6 @@ type = custom/script
 exec = ~/.config/polybar/mpd-tail.sh
 tail = true
 label-font = 2
-format-prefix = " "
 label = %output:0:30:...%
 
 [module/openweathermap-simple]

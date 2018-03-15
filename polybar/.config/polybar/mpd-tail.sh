@@ -9,7 +9,9 @@ _mpc() {
 playing_print() {
     s=`_mpc status`
     if echo "$s" | grep playing > /dev/null; then
-        echo "$s" | head -1
+        echo "  $s" | head -1
+    elif echo "$s" | grep paused >> /dev/null; then
+        echo "  $s" | head -1
     else
         echo ""
     fi
