@@ -4,10 +4,9 @@
 # Video
 hwdec = vaapi
 autofit = 75%x75%
-x11-bypass-compositor = never
 
 # profile = opengl-hq
-scale=lanczos
+scale=spline36
 dscale=mitchell
 dither-depth=auto
 correct-downscaling=yes
