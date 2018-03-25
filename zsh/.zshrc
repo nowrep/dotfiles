@@ -28,7 +28,7 @@ bindkey '^N' history-search-forward
 export HISTSIZE=100000
 export HISTFILESIZE=100000
 export LISTMAX=9999
-export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
+export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear:ll"
 
 # Change default shell text editor
 export EDITOR=/usr/bin/nvim
@@ -63,6 +63,7 @@ alias diff="colordiff"
 alias valgrind-full="valgrind --leak-check=full --show-reachable=yes --track-origins=yes"
 alias kf5-env="source /media/Data/KDE/env.sh"
 alias callgrind="valgrind --tool=callgrind"
+alias cmake="cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
 alias kf5-cmake="cmake .. -DCMAKE_CXX_FLAGS:STRING=-pipe -DCMAKE_INSTALL_PREFIX=/media/Data/KDE"
 alias vi='nvim'
 alias vim='nvim'
