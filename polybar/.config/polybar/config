@@ -46,7 +46,7 @@ font-2 = Weather Icons:size=12;2
 
 modules-left = i3 mpd-tail openweathermap-simple
 modules-center = xwindow
-modules-right = xkeyboard volume memory cpu temperature battery date
+modules-right = xkeyboard pulseaudio memory cpu temperature battery date
 
 tray-position = right
 tray-padding = 1
@@ -174,8 +174,8 @@ format-prefix = 
 
 label = %date% %time%
 
-[module/volume]
-type = internal/volume
+[module/pulseaudio]
+type = internal/pulseaudio
 
 format-volume = <ramp-volume> <label-volume>
 label-volume-foreground = ${root.foreground}
