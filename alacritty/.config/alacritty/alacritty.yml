@@ -32,16 +32,16 @@ window:
 
   # Window decorations
   # Setting this to false will result in window without borders and title bar.
-  decorations: false
+  decorations: true
 
 scrolling:
   # How many lines of scrollback to keep,
   # '0' will disable scrolling.
-  history: 99999
+  history: 10000
 
   # Number of lines the viewport will move for every line
   # scrolled when scrollback is enabled (history > 0).
-  multiplier: 3
+  multiplier: 6
 
   # Faux Scrolling
   #
@@ -51,7 +51,7 @@ scrolling:
   # scrolling for applications like `man`.
   #
   # To disable this completely, set `faux_multiplier` to 0.
-  faux_multiplier: 3
+  faux_multiplier: 6
 
   # Automatically scroll to the bottom when new text is written
   # to the terminal.
