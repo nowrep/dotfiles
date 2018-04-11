@@ -176,6 +176,7 @@ for_window [class="Pavucontrol"] floating enable
 for_window [class="ark"] floating enable
 for_window [class="trackma-qt"] floating enable
 for_window [class="gwenview"] floating enable
+for_window [class="Smybox"] floating enable
 
 set $blue #3daee9
 set $darkblue #34495e
