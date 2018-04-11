@@ -64,7 +64,7 @@ alias valgrind-full="valgrind --leak-check=full --show-reachable=yes --track-ori
 alias kf5-env="source /media/Internal/KDE/env.sh"
 alias callgrind="valgrind --tool=callgrind"
 alias kf5-cmake="cmake .. -DCMAKE_CXX_FLAGS:STRING=-pipe -DCMAKE_INSTALL_PREFIX=/media/Internal/KDE"
-alias cmake="cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+alias cmake="cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -GNinja"
 alias vi='nvim'
 alias vim='nvim'
 alias vimdiff='nvim -d'
