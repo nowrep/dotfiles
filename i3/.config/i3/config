@@ -132,8 +132,8 @@ bindsym $mod+Return exec --no-startup-id $term
 bindsym $mod+e exec dolphin
 
 # Screenshots
-bindsym Print exec --no-startup-id scrot ~/Pictures/Screenshot_$(date +"%Y-%m-%d_%H:%M:%S.png") -e 'notify-send -i $f "Screenshot saved" "$n"'
-bindsym $mod+Print exec --no-startup-id scrot -b -u ~/Pictures/Screenshot_$(date +"%Y-%m-%d_%H:%M:%S.png") -e 'notify-send -i $f "Screenshot saved" "$n"'
+bindsym Print exec --no-startup-id scrot ~/Pictures/screenshots/$(date +"%Y-%m-%d_%H:%M:%S.png") -e 'notify-send -i $f "Screenshot saved" "$n"'
+bindsym $mod+Print exec --no-startup-id scrot -b -u ~/Pictures/screenshots/$(date +"%Y-%m-%d_%H:%M:%S.png") -e 'notify-send -i $f "Screenshot saved" "$n"'
 
 # Start your launcher
 bindsym $mod+d exec --no-startup-id rofi -show drun
@@ -200,6 +200,7 @@ exec --no-startup-id ~/.config/i3/pulseaudio-notifier.sh
 exec --no-startup-id compton -b
 exec --no-startup-id redshift
 exec --no-startup-id udiskie
+exec --no-startup-id clipster -d
 
 exec --no-startup-id GTK_THEME=Adwaita:dark XDG_DATA_DIRS=~/.local/share/icons/nm-applet:$XDG_DATA_DIRS nm-applet
 exec --no-startup-id /usr/lib/kdeconnectd
