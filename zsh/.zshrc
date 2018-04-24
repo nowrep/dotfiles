@@ -121,32 +121,8 @@ function backuphome {
     cd -
 }
 
-function rpiupdate {
-    DIRNAME=`echo $1 | sed 's/.tar$//' | sed 's/Milhouse/devel/'`
-    tar xf $1
-    test -d $DIRNAME || return 1
-    cd $DIRNAME
-    scp target/* 3rdparty/bootloader/{fixup,bootcode,start}* root@10.0.0.1:/storage/.update
-    ssh root@10.0.0.1 '( mount -o remount,rw /flash; \
-                         mv /storage/.update/bootcode.bin \
-                            /storage/.update/fixup.dat \
-                            /storage/.update/start.elf \
-                            /flash/; \
-                         sync; \
-                         reboot; )'
-    cd -
-    rm -r $DIRNAME
-}
-
-function bt-toggle {
-    STATE=`/usr/sbin/rfkill list bluetooth | head -2 | grep "blocked: yes"`
-    if [ "$STATE" = "" ]; then
-        echo "Blocking bluetooth..."
-        /usr/sbin/rfkill block bluetooth
-    else
-        echo "Unlocking bluetooth..."
-        /usr/sbin/rfkill unblock bluetooth
-    fi
+function avahi-ip {
+    avahi-resolve -n "$1".local | cut -f2
 }
 
 function encode_c7 {
@@ -242,12 +218,6 @@ function android-env {
     export ANDROID_NDK_ROOT=/media/Internal/Android/android-ndk-r15c
     export PATH=/media/Internal/Android/Qt-5.9.2/5.9.2/android_armv7/bin:$PATH
 }
-
-# termite
-if [[ $TERM == xterm-termite ]]; then
-    source /etc/profile.d/vte.sh
-    __vte_osc7
-fi
 
 # Private
 source ~/.zshrc_private
