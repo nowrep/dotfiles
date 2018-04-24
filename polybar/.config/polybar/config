@@ -47,7 +47,7 @@ font-2 = Weather Icons:size=12;2
 
 modules-left = i3 mpd-tail openweathermap-simple
 modules-center = xwindow
-modules-right = xkeyboard pulseaudio memory cpu temperature battery date
+modules-right = openvpn xkeyboard pulseaudio memory cpu temperature battery date
 
 tray-position = right
 tray-padding = 1
@@ -68,6 +68,12 @@ scroll-down = i3wm-wsprev
 type = internal/xwindow
 label = %title:0:150:...%
 label-font = 2
+
+[module/openvpn]
+type = custom/script
+exec = ps aux | grep openvpn | grep -v grep > /dev/null && echo "vpn"
+interval = 5
+format-prefix = " "
 
 [module/xkeyboard]
 type = internal/xkeyboard
