@@ -40,5 +40,7 @@ cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c '3 $wincmd l' -c 'wincmd J'
 [url "git@git.kde.org:"]
 insteadOf = kde:
 pushInsteadOf = kde:
-[url "git://anongit.kde.org/"]
-insteadOf = kde:
+
+[url "git@code.smybox.com:"]
+insteadOf = smybox:
+pushInsteadOf = smybox:
