@@ -52,6 +52,10 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
+# Move the current workspace to the next output
+# (effectively toggles when you only have two outputs)
+bindsym $mod+x move workspace to output right
+
 # Switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
