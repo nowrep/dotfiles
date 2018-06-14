@@ -19,7 +19,7 @@ up = pull --rebase --autostash
 gpgsign = true
 
 [push]
-default = matching
+default = current
 
 [diff]
 compactionHeuristic = true
