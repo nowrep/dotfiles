@@ -404,12 +404,6 @@ inoremap jj <Esc>
 " Make dot work in visual mode
 vnoremap . :norm.<CR>
 
-" Faster vertical movement
-nnoremap <A-j> 5j
-nnoremap <A-k> 5k
-vnoremap <A-j> 5j
-vnoremap <A-k> 5k
-
 " Create Blank Newlines and stay in Normal mode
 nnoremap <silent> zj o<Esc>
 nnoremap <silent> zk O<Esc>
@@ -511,19 +505,6 @@ nnoremap <silent> <Leader>u :MundoToggle<CR>
 " Operator flashy
 map y <Plug>(operator-flashy)
 nmap Y <Plug>(operator-flashy)$
-
-" Command line mappings
-cnoremap <C-a>  <Home>
-cnoremap <C-b>  <Left>
-cnoremap <C-f>  <Right>
-cnoremap <C-d>  <Delete>
-cnoremap <A-b>  <S-Left>
-cnoremap <A-f>  <S-Right>
-cnoremap <A-d>  <S-right><Delete>
-cnoremap <Esc>b <S-Left>
-cnoremap <Esc>f <S-Right>
-cnoremap <Esc>d <S-right><Delete>
-cnoremap <C-g>  <C-c>
 
 " Leave terminal mode
 tnoremap <C-a> <C-\><C-n>
