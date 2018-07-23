@@ -79,12 +79,12 @@ alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 alias adb-stop="sudo adb kill-server"
 
 # Pac aliases
-alias aa='pacaur'
+alias aa='yay'
 alias asearch='pacman -Ss'
-alias aasearch='pacaur -s'
-alias aup='pacaur -Syu'
+alias aasearch='yay -as'
+alias aup='yay -Syu'
 alias ain='sudo pacman -S'
-alias aain='pacaur -y'
+alias aain='yay -y'
 alias ains='sudo pacman -U'
 alias are='sudo pacman -Rsn'
 
