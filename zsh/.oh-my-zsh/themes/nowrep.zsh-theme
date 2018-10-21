@@ -52,7 +52,7 @@ return_code_disabled=
 return_code=$return_code_enabled
 
 PROMPT='%{%f%k%b%}
-%{%B%F{$(_user_color)}%}%n%{%B%F{blue}%}@%{%B%F{cyan}%}%m%{%B%F{green}%} \
+%{%B%F{$(_user_color)}%}%n%{%B%F{blue}%}@%{%B%F{cyan}%}${${(%):-%m}:l}%{%B%F{green}%} \
 %{%b%F{yellow}%}%$PR_PWDLEN<...<%~%<<%{%B%F{green}%}\
 $(git_prompt_info)$PR_HBAR${(e)PR_FILLBAR}$(date +%X)%E%{%f%k%b%}
 $(_prompt_char) %#%{%f%k%b%} '
