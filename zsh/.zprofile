@@ -11,15 +11,6 @@ unset c
 # Gtk3 accessibility
 export NO_AT_BRIDGE=1
 
-# QtQuick threaded rendering
-export QSG_RENDER_LOOP=threaded
-
-# QtQuick 2D renderer
-# export QMLSCENE_DEVICE=softwarecontext
-
-# VDPAU VA-API backend
-#export VDPAU_DRIVER=va_gl
-
 # WINE!
 export WINEDLLOVERRIDES=winemenubuilder.exe=d
 
