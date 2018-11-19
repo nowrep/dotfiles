@@ -367,6 +367,9 @@ set autoread
 " Don't use preview window for completions
 set completeopt-=preview
 
+set modeline
+set modelines=5
+
 ""------------------------------------------------------------
 " Indentation options
 "
