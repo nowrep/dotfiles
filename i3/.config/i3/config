@@ -126,7 +126,8 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # Start a terminal
-bindsym $mod+Return exec --no-startup-id $term
+# workaround alacritty#1859
+bindsym $mod+Return exec --no-startup-id sleep 0.1 && $term
 
 # File manager with mod+e
 bindsym $mod+e exec dolphin
