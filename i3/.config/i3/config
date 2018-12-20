@@ -137,6 +137,7 @@ bindsym $mod+Print exec --no-startup-id scrot -b -u ~/Pictures/screenshots/$(dat
 
 # Start your launcher
 bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym $mod+p exec --no-startup-id ~/.config/rofi/passmenu --type
 
 # Brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight +10 -time 200
