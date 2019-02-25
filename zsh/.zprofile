@@ -14,6 +14,9 @@ export NO_AT_BRIDGE=1
 # WINE!
 export WINEDLLOVERRIDES=winemenubuilder.exe=d
 
+# Firefox touchscreen
+export MOZ_USE_XINPUT2=1
+
 # i3
 if [ "$XDG_CURRENT_DESKTOP" = "i3" ]; then
     # PAM KWallet environment
