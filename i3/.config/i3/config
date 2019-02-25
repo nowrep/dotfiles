@@ -141,8 +141,8 @@ bindsym $mod+d exec --no-startup-id rofi -show drun
 bindsym $mod+p exec --no-startup-id ~/.config/rofi/passmenu --type
 
 # Brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight +10 -time 200
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -10 -time 200
+bindsym XF86MonBrightnessUp exec --no-startup-id ~/.config/i3/brightness.sh +200
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/brightness.sh -200
 
 # Volume controls
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
