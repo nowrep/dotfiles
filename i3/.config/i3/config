@@ -155,6 +155,10 @@ bindsym XF86AudioPrev exec --no-startup-id mpc prev
 bindsym XF86AudioPlay exec --no-startup-id mpc toggle
 bindsym XF86AudioStop exec --no-startup-id mpc stop
 
+# Rotation controls
+bindsym XF86TaskPane exec --no-startup-id ~/.config/i3/rotate-desktop.sh normal
+bindsym XF86RotateWindows exec --no-startup-id ~/.config/i3/rotate-desktop.sh cycle
+
 # Locking
 bindsym $mod+Pause exec --no-startup-id i3lock
 
