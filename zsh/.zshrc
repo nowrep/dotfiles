@@ -71,6 +71,7 @@ alias vimdiff='nvim -d'
 alias pingg='ping -c 3 8.8.8.8'
 alias objdump='objdump -M intel'
 alias hukotvpn="(cd ~/Documents/vpn && sudo openvpn client.conf)"
+alias sway=~/.config/sway/start.sh
 
 # Sudo aliases
 alias sudo="nocorrect sudo "
@@ -134,6 +135,38 @@ function encode_motog {
     ffmpeg -i "$1" -threads 4 -vcodec libx264 -s 1280x720 -strict experimental out.mp4
 }
 
+function encode_psvr {
+    local input="$1"
+    local output=${input:s/.mp4/_180_sbs.mp4}
+    local height=`mediainfo --Inform="Video;%Height%" "$input"`
+    local scale="w=3800:h=1900"
+    local bitrate="20000k"
+    if [ $height -le 1440 ]; then
+        scale="w=2880:h=1440"
+        bitrate="17500k"
+    elif [ $height -le 1600 ]; then
+        scale="w=3200:h=1600"
+        bitrate="18000k"
+    fi
+    ffmpeg -i "$input" -y -acodec aac -ar 48000 -ac 2 -b:a 192k -vcodec libx264 -b:v $bitrate -filter:v scale=$scale -f mp4 -pix_fmt yuv420p -profile:v High -level:v 5.1 -bf 0 -slices 24 -refs 1 -threads 0 -x264opts no-cabac:aq-mode=1:aq-strength=0.7:slices=24:direct=spatial:me=tesa:subme=8:trellis=1 -flags +global_header -map_metadata -1 "$output"
+}
+
+function encode_go {
+    local input="$1"
+    local output=${input:s/.mp4/_180_sbs.mp4}
+    local height=`mediainfo --Inform="Video;%Height%" "$input"`
+    local scale="w=4800:h=2400"
+    local bitrate="30000k"
+    if [ $height -le 1440 ]; then
+        scale="w=2880:h=1440"
+        bitrate="17500k"
+    elif [ $height -le 1600 ]; then
+        scale="w=3200:h=1600"
+        bitrate="18000k"
+    fi
+    ffmpeg -i "$input" -y -acodec aac -ar 48000 -ac 2 -b:a 192k -vcodec libx264 -b:v $bitrate -filter:v scale=$scale -f mp4 -pix_fmt yuv420p -profile:v High -level:v 5.1 -bf 0 -slices 24 -refs 1 -threads 0 -x264opts no-cabac:aq-mode=1:aq-strength=0.7:slices=24:direct=spatial:me=tesa:subme=8:trellis=1 -flags +global_header -map_metadata -1 "$output"
+}
+
 function encode_8bit {
     local tmpfile=/tmp/8bit.mkv
     x264 --preset veryfast --tune animation --crf 18 -o $tmpfile "$1"
@@ -191,16 +224,25 @@ function xbox-ps3 {
 
 function shares-start {
     sudo systemctl start vsftpd
-    sudo mount --bind /media/Data/Torrents ~/Shares/ftp/Videos/Torrents
     sudo mount --bind /media/Data/Videa ~/Shares/ftp/Videos/Videa
+    sudo mount --bind /media/Data2/Torrents ~/Shares/ftp/Videos/Torrents
     sudo mount --bind ~/Music ~/Shares/ftp/Music
 }
 
 function shares-stop {
     sudo systemctl stop vsftpd
-    sudo umount ~/Shares/ftp/Videos/Torrents
     sudo umount ~/Shares/ftp/Videos/Videa
+    sudo umount ~/Shares/ftp/Videos/Torrents
     sudo umount ~/Shares/ftp/Music
+}
+
+function dlna-start {
+    sudo rm /var/cache/minidlna/files.db
+    sudo systemctl start minidlna
+}
+
+function dlna-stop {
+    sudo systemctl stop minidlna
 }
 
 function vita-env {
@@ -218,6 +260,14 @@ function android-env {
     export ANDROID_SDK_ROOT=/media/Data/Android/Sdk
     export ANDROID_NDK_ROOT=/media/Data/Android/android-ndk-r15c
     export PATH=/media/Data/Android/Qt-5.9.2/5.9.2/android_armv7/bin:$PATH
+}
+
+function enable-swap {
+    local swapfile=/media/DataSSD/swapfile
+    sudo fallocate -l 16G $swapfile
+    sudo chmod 600 $swapfile
+    sudo mkswap $swapfile
+    sudo swapon $swapfile
 }
 
 # Private
