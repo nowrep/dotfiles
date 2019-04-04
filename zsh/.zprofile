@@ -1,7 +1,7 @@
 # ~/.zprofile: executed by the command interpreter for login shells.
 
 # PATH
-export PATH=$PATH:~/Programming/bin
+export PATH=$PATH:~/Programming/bin:~/.gem/ruby/2.6.0/bin
 
 # Qt logging
 c=`echo -e "\033"`

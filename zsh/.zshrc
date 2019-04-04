@@ -153,7 +153,7 @@ function encode_psvr {
 
 function encode_go {
     local input="$1"
-    local output=${input:s/.mp4/_180_sbs.mp4}
+    local output=${input:s/.mp4/180x180_3dh.mp4}
     local height=`mediainfo --Inform="Video;%Height%" "$input"`
     local scale="w=4800:h=2400"
     local bitrate="30000k"
