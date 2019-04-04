@@ -15,6 +15,10 @@ env:
   TERM: xterm-256color
   W3MIMGDISPLAY_PATH: ~/.config/alacritty/w3mimg.sh
 
+dpi:
+  x: 115
+  y: 115
+
 window:
   # Window dimensions in character columns and lines
   # Falls back to size specified by window manager if set to 0x0.
@@ -23,12 +27,16 @@ window:
     columns: 80
     lines: 24
 
-  # Adds this many blank pixels of padding around the window
-  # Units are physical pixels; this is not DPI aware.
-  # (change requires restart)
+  # Window padding (changes require restart)
+  #
+  # Blank space added around the window in pixels. This padding is scaled
+  # by DPI and the specified value is always added at both opposing sides.
   padding:
     x: 6
     y: 2
+
+  # Spread additional padding evenly around the terminal content.
+  dynamic_padding: true
 
   # Window decorations
   # Setting this to false will result in window without borders and title bar.
@@ -59,9 +67,6 @@ scrolling:
 
 # Display tabs using this many cells (changes require restart)
 tabspaces: 4
-
-# When true, bold text is drawn using the bright variant of colors.
-draw_bold_text_with_bright_colors: true
 
 # Font configuration (changes require restart)
 #
@@ -125,6 +130,12 @@ font:
 # Should display the render timer
 render_timer: false
 
+# Keep the log file after quitting Alacritty.
+persistent_logging: false
+
+# When true, bold text is drawn using the bright variant of colors.
+draw_bold_text_with_bright_colors: true
+
 # Colors (seoul256)
 colors:
   # Default colors
@@ -169,6 +180,16 @@ colors:
     magenta: '0xcc99cc'
     cyan:    '0x66cccc'
     white:   '0xdddddd'
+
+  # Indexed Colors
+  #
+  # The indexed colors include all colors from 16 to 256.
+  # When these are not set, they're filled with sensible defaults.
+  #
+  # Example:
+  #   `- { index: 16, color: '0xff00ff' }`
+  #
+  indexed_colors: []
 
 # Visual Bell
 #
@@ -250,6 +271,7 @@ selection:
   # clipboard.
   save_to_clipboard: false
 
+# Allow terminal applications to change Alacritty's window title.
 dynamic_title: true
 
 cursor:
@@ -277,6 +299,9 @@ live_config_reload: true
 #   program: /bin/bash
 #   args:
 #     - --login
+
+# Send ESC (\x1b) before characters when alt is pressed.
+alt_send_esc: true
 
 # Key bindings
 #
