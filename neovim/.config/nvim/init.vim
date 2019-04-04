@@ -64,17 +64,10 @@ Plug 'junegunn/seoul256.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 
-" Language Server Protocol
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
-
-" Neosnippet
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
-
-" Deoplete
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neco-syntax'
-Plug 'Shougo/neopairs.vim'
+" CoC
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
 
 " Games
 Plug 'vim-scripts/TeTrIs.vim'
@@ -199,22 +192,6 @@ let g:startify_custom_footer =
         \ '   NeoVim (' . version . ')',
         \ ''
     \ ]
-
-" Language Server Protocol
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-    \ 'c': ['cquery', '--log-file=/tmp/cquery.log'],
-    \ 'cpp': ['cquery', '--log-file=/tmp/cquery.log'],
-\ }
-let g:LanguageClient_loadSettings = 1
-let g:LanguageClient_settingsPath = expand('~') . '/.config/nvim/languageclientsettings.json'
-
-" Neosnippet
-" let g:neosnippet#disable_runtime_snippets = 1
-
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_refresh_always = 1
 
 " Echodoc
 let g:echodoc_enable_at_startup = 1
@@ -482,20 +459,10 @@ vmap <C-_> gc
 " Neomake
 nnoremap <silent> <Leader><C-b> :wa<CR>:Neomake!<CR>
 
-" Language Server Protocol
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F3> :call LanguageClient_textDocument_rename()<CR>
-
-" Neosnippet
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-            \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-            \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-" Deoplete
-inoremap <silent><expr> <C-n>
-    \ pumvisible() ? "\<C-n>" :
-    \ deoplete#mappings#manual_complete()
+" CoC
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-y>" : "\<C-g>u\<TAB>"
+" let g:coc_snippet_next = '<TAB>'
+" let g:coc_snippet_prev = '<S-TAB>'
 
 " Sayonara
 nnoremap <Leader><C-w> :Sayonara!<CR>
@@ -544,6 +511,8 @@ augroup vimrc
     autocmd User Startified setlocal buftype=
     " vim-closer
     autocmd FileType rust let b:closer = 1 | let b:closer_flags = '([{'
+    " CoC
+    autocmd FileType json syntax match Comment +\/\/.\+$+
 augroup END
 
 "------------------------------------------------------------
