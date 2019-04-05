@@ -13,7 +13,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'embear/vim-localvimrc'
 Plug 'ryanoasis/vim-devicons'
-Plug 'benekastah/neomake'
 Plug 'easymotion/vim-easymotion'
 Plug 'mhinz/vim-sayonara'
 Plug 'mhinz/vim-startify'
@@ -37,7 +36,6 @@ Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/gv.vim'
 Plug 'rstacruz/vim-closer'
-Plug 'ap/vim-css-color'
 Plug 'wellle/visual-split.vim'
 Plug 'terryma/vim-expand-region'
 Plug 'szw/vim-maximizer'
@@ -122,39 +120,8 @@ let g:localvimrc_persistence_file = expand('~') . '/.config/nvim/lvimrc_persiste
 " vim-devicons
 let g:webdevicons_enable_nerdtree = 0
 
-" neomake
-let g:neomake_open_list = 2
-let g:neomake_list_height = 8
-
-let g:neomake_makegcc_maker =
-\ {
-    \ 'exe': 'make',
-    \ 'args': ['-j4'],
-    \ 'errorformat': neomake#makers#ft#cpp#gcc().errorformat . ',' .
-                \ '%-Gmake%.%#,' .
-                \ '%-Gcd %.%#,' .
-                \ '%-Gg++ %.%#,'
-\ }
-let g:neomake_bearmakegcc_maker =
-\ {
-    \ 'exe': 'bear',
-    \ 'args': ['-a', 'make'],
-    \ 'errorformat': neomake#makers#ft#cpp#gcc().errorformat . ',' .
-                \ '%-Gmake%.%#,' .
-                \ '%-Gcd %.%#,' .
-                \ '%-Gg++ %.%#,'
-\ }
-
-" Show build status in airline
-augroup my_neomake_hooks
-    au!
-    autocmd User NeomakeJobStarted let g:neomake_build_running = 1
-    autocmd User NeomakeJobFinished let g:neomake_build_running = 0
-    autocmd VimEnter * let g:airline_section_error = airline#section#create(['neomake_error_count', 'neomake_build_running'])
-augroup END
-let g:neomake_build_running = 0
-call airline#parts#define_text('neomake_build_running', '  ')
-call airline#parts#define_condition('neomake_build_running', 'g:neomake_build_running == 1')
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
 " vim-easymotion
 let g:EasyMotion_do_mapping = 0
@@ -456,13 +423,12 @@ nnoremap <Leader><S-b> :CtrlPBuffer<CR>
 nmap <C-_> gcc
 vmap <C-_> gc
 
-" Neomake
-nnoremap <silent> <Leader><C-b> :wa<CR>:Neomake!<CR>
-
 " CoC
-inoremap <silent><expr> <TAB> pumvisible() ? "\<C-y>" : "\<C-g>u\<TAB>"
-" let g:coc_snippet_next = '<TAB>'
-" let g:coc_snippet_prev = '<S-TAB>'
+inoremap <silent><expr> <TAB> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<TAB>"
+nnoremap <silent> K :call CocAction("doHover")<CR>
+nnoremap <silent> <F2> :call CocAction("jumpDefinition")<CR>
+nnoremap <silent> <F3> :call CocAction("rename")<CR>
+nnoremap <silent> <F5> :call CocAction("doQuickfix")<CR>
 
 " Sayonara
 nnoremap <Leader><C-w> :Sayonara!<CR>
@@ -505,8 +471,6 @@ augroup vimrc
     " Tex
     autocmd filetype tex setlocal wrap
     autocmd filetype tex command OpenPdf call system("okular " . expand("build/*.pdf") . "&")
-    " Neomake
-    autocmd! BufWritePost *.qml Neomake
     " Startify
     autocmd User Startified setlocal buftype=
     " vim-closer
