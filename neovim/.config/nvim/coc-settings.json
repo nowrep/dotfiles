@@ -11,6 +11,10 @@
                     "directory": "/tmp/ccls"
                 }
             }
+        },
+        "lua": {
+            "command": "~/.luarocks/bin/lua-lsp",
+            "filetypes": ["lua"]
         }
     }
 }
