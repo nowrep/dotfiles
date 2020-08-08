@@ -37,6 +37,12 @@ conflictstyle = diff3
 [mergetool "nvimmerge"]
 cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c '3 $wincmd l' -c 'wincmd J'"
 
+[sendemail]
+smtpserver = smtp.gmail.com
+smtpserverport = 587
+smtpencryption = tls
+smtpuser = nowrep
+
 [url "git@git.kde.org:"]
 insteadOf = kde:
 pushInsteadOf = kde:
