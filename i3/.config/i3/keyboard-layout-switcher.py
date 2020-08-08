@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import i3ipc
+import subprocess
 from xkbgroup import XKeyboard
 
 CZ_LAYOUT = 0
@@ -16,6 +17,8 @@ us_window_classes = [
     "assistant", # Qt Assistant
 ]
 
+in_wow = False
+
 i3 = i3ipc.Connection()
 xkb = XKeyboard()
 
@@ -27,7 +30,16 @@ def on_window_focus(i3, e):
         xkb.group_num = US_LAYOUT
     else:
         xkb.group_num = CZ_LAYOUT
+
+    global in_wow
+    if focused.window_instance == "wow.exe" or focused.window_instance == "wowclassic.exe" or focused.window_instance == "ffxiv_dx11.exe":
+        in_wow = True
+        subprocess.run(["setxkbmap", "-option", "altwin:swap_lalt_lwin"])
+    elif in_wow:
+        in_wow = False
+        subprocess.run(["setxkbmap", "-option"])
     # print(focused.window_class)
+    # print(focused.window_instance)
     # print('Focused window %s is on workspace %s' % (focused.name, focused.workspace().name))
 
 i3.on("window::focus", on_window_focus)

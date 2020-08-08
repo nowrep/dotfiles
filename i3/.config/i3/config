@@ -154,6 +154,9 @@ bindsym XF86AudioStop exec --no-startup-id mpc stop
 # Locking
 bindsym $mod+Pause exec --no-startup-id i3lock
 
+# Disable Alt+F4
+bindsym Mod1+F4 exec --no-startup-id true
+
 # Disable titlebars
 new_window pixel 1
 
@@ -175,6 +178,7 @@ for_window [class="ark"] floating enable
 for_window [class="trackma-qt"] floating enable
 for_window [class="gwenview"] floating enable
 for_window [class="Smybox"] floating enable
+for_window [class="Smypad"] floating enable
 
 set $blue #3daee9
 set $darkblue #34495e
@@ -195,7 +199,7 @@ exec_always --no-startup-id ~/.config/i3/startup.sh
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec_always --no-startup-id ~/.config/i3/keyboard-layout-switcher.py
 exec --no-startup-id ~/.config/i3/pulseaudio-notifier.sh
-exec --no-startup-id compton -b
+exec --no-startup-id picom -b --experimental-backends --dbus
 exec --no-startup-id redshift
 exec --no-startup-id udiskie
 exec --no-startup-id clipster -d

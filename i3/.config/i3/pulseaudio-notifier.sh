@@ -34,8 +34,11 @@ volume_notify() {
     old_muted=$muted
 }
 
-pactl subscribe | while read -r event; do
-    if echo "$event" | grep -q "on sink #$sink"; then
-        volume_notify
-    fi
+while true; do
+    pactl subscribe | while read -r event; do
+        if echo "$event" | grep -q "on sink #$sink"; then
+            volume_notify
+        fi
+    done
+    sleep 5
 done
