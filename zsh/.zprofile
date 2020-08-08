@@ -21,11 +21,6 @@ if [ "$XDG_CURRENT_DESKTOP" = "i3" ]; then
         env | socat STDIN UNIX-CONNECT:$PAM_KWALLET5_LOGIN
     fi
 
-    # Set display to dbus daemon (needed?)
-    if test -n "$DISPLAY" ; then
-        dbus-update-activation-environment --systemd DISPLAY
-    fi
-
     # Language
     export LANG=en_US.UTF-8
     export LANGUAGE=en_US

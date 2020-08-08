@@ -155,8 +155,8 @@ function encode_go {
     local input="$1"
     local output=${input:s/.mp4/180x180_3dh.mp4}
     local height=`mediainfo --Inform="Video;%Height%" "$input"`
-    local scale="w=4800:h=2400"
-    local bitrate="30000k"
+    local scale="w=4096:h=2048"
+    local bitrate="25000k"
     if [ $height -le 1440 ]; then
         scale="w=2880:h=1440"
         bitrate="17500k"
@@ -169,7 +169,7 @@ function encode_go {
 
 function encode_8bit {
     local tmpfile=/tmp/8bit.mkv
-    x264 --preset veryfast --tune animation --crf 18 -o $tmpfile "$1"
+    x264 --tune animation --crf 18 -o $tmpfile "$1"
     mkvmerge -o "$1.8bit.mkv" -D "$1" -A -S -T -M -B $tmpfile
     rm $tmpfile
 }
@@ -223,21 +223,16 @@ function xbox-ps3 {
 }
 
 function shares-start {
-    sudo systemctl start vsftpd
-    sudo mount --bind /media/Data/Videa ~/Shares/ftp/Videos/Videa
-    sudo mount --bind /media/Data2/Torrents ~/Shares/ftp/Videos/Torrents
-    sudo mount --bind ~/Music ~/Shares/ftp/Music
+    cd ~/Shares/webdav/
+    nohup ./dave > /dev/null &
+    cd -
 }
 
 function shares-stop {
-    sudo systemctl stop vsftpd
-    sudo umount ~/Shares/ftp/Videos/Videa
-    sudo umount ~/Shares/ftp/Videos/Torrents
-    sudo umount ~/Shares/ftp/Music
+    pkill dave
 }
 
 function dlna-start {
-    sudo rm /var/cache/minidlna/files.db
     sudo systemctl start minidlna
 }
 
@@ -268,6 +263,18 @@ function enable-swap {
     sudo chmod 600 $swapfile
     sudo mkswap $swapfile
     sudo swapon $swapfile
+}
+
+function run-scaled {
+    Xephyr -once -screen 1024x768 :1 &; sleep 2
+    x11vnc -localhost -display :1 -scale 2 -repeat -nocursor &
+    krdc vnc://david@localhost &
+    DISPLAY=:1 "$@"
+    pkill Xephyr
+}
+
+function record-desktop {
+    ffmpeg -video_size 2560x1440 -draw_mouse 0 -framerate 30 -f x11grab -i :0.0+0,0 -f pulse -ac 2 -i alsa_output.pci-0000_00_1f.3.analog-stereo.monitor output.mkv
 }
 
 # Private
