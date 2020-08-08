@@ -2,15 +2,12 @@
 [default]
 
 # Video
-hwdec = vaapi
+hwdec = auto
 autofit = 75%x75%
 
-# profile = opengl-hq
-scale=spline36
-dscale=mitchell
-dither-depth=auto
-correct-downscaling=yes
-sigmoid-upscaling=yes
+profile = gpu-hq
+scale = ewa_lanczossharp
+cscale = ewa_lanczossharp
 
 # Audio
 volume = 100
