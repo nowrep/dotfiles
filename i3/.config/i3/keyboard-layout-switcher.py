@@ -32,12 +32,13 @@ def on_window_focus(i3, e):
         xkb.group_num = CZ_LAYOUT
 
     global in_wow
-    if focused.window_instance == "wow.exe" or focused.window_instance == "wowclassic.exe" or focused.window_instance == "ffxiv_dx11.exe":
+    if focused.window_instance == "steam_app_WoW" or focused.window_instance == "ffxiv_dx11.exe" or focused.window_instance == "steam_app_FFXIV":
         in_wow = True
         subprocess.run(["setxkbmap", "-option", "altwin:swap_lalt_lwin"])
     elif in_wow:
         in_wow = False
         subprocess.run(["setxkbmap", "-option"])
+        subprocess.run(["setxkbmap", "-option", "grp:sclk_toggle", "-option", "numpad:mac"])
     # print(focused.window_class)
     # print(focused.window_instance)
     # print('Focused window %s is on workspace %s' % (focused.name, focused.workspace().name))
