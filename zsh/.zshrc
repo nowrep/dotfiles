@@ -277,5 +277,24 @@ function record-desktop {
     ffmpeg -video_size 2560x1440 -draw_mouse 0 -framerate 30 -f x11grab -i :0.0+0,0 -f pulse -ac 2 -i alsa_output.pci-0000_00_1f.3.analog-stereo.monitor output.mkv
 }
 
+function stream-sink {
+    if pactl list modules | grep stream_sink > /dev/null; then
+        echo "Already loaded"
+        return
+    fi
+    # pactl load-module module-virtual-sink sink_name=stream_sink
+    # pacmd 'update-sink-proplist stream_sink device.description="OBS Stream"'
+    pw-cli create-node adapter '{
+        factory.name=support.null-audio-sink
+        node.name=stream_sink
+        node.description="OBS Stream"
+        media.class=Audio/Sink
+        object.linger=true
+        audio.position=[FL FR]
+    }'
+    pw-link 'stream_sink:monitor_FL' 'alsa_output.pci-0000_00_1f.3.analog-stereo:playback_FL'
+    pw-link 'stream_sink:monitor_FR' 'alsa_output.pci-0000_00_1f.3.analog-stereo:playback_FR'
+}
+
 # Private
 source ~/.zshrc_private

@@ -14,6 +14,8 @@ export NO_AT_BRIDGE=1
 # WINE!
 export WINEDLLOVERRIDES=winemenubuilder.exe=d
 
+export OBS_USE_EGL=1
+
 # i3
 if [ "$XDG_CURRENT_DESKTOP" = "i3" ]; then
     # PAM KWallet environment
@@ -28,7 +30,7 @@ if [ "$XDG_CURRENT_DESKTOP" = "i3" ]; then
     export LC_MONETARY=cs_CZ.UTF-8
     export LC_NUMERIC=cs_CZ.UTF-8
     export LC_TIME=cs_CZ.UTF-8
-    export TZ=:/etc/localtime
+    export TZ=/etc/localtime
 
     # Qt platform theme
     export QT_QPA_PLATFORMTHEME="qt5ct"
