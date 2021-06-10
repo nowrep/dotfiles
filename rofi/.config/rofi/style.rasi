@@ -11,7 +11,7 @@
   fc-color-trans: #39393ac5;
   bg-color-trans: #262626f0;
 
-  font: "Noto Sans 11";
+  font: "Noto Sans 14";
 }
 
 /* ================================================= */
@@ -39,11 +39,11 @@
 }
 
 #prompt {
-  font: "Noto Sans SemiBold Italic 11";
+  font: "Noto Sans SemiBold Italic 12";
 }
 
 #entry {
-  font: "Noto Sans Italic 11";
+  font: "Noto Sans Italic 12";
   width: 15em;
 }
 
@@ -89,4 +89,8 @@
 
 #element selected urgent {
   background-color:  DarkOrange;
+}
+
+element-icon {
+  size: 2.5ch;
 }
