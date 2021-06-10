@@ -1,5 +1,8 @@
 {
     "diagnostic.errorSign": "✗",
+    "diagnostic.warningSign": "⚠",
+    "diagnostic.infoSign": "➜",
+    "diagnostic.hintSign": "➜",
     "suggest.snippetIndicator": " ➜",
     "languageserver": {
         "ccls": {
@@ -13,8 +16,13 @@
             }
         },
         "lua": {
-            "command": "~/.luarocks/bin/lua-lsp",
-            "filetypes": ["lua"]
+            "command": "/usr/bin/lua-language-server",
+            "args": ["-E", "-e", "LANG=en", "/usr/share/lua-language-server/main.lua"],
+            "filetypes": ["lua"],
+            "rootPatterns": [".git/"]
         }
-    }
+    },
+    "Lua.diagnostics.disable" : [
+        "lowercase-global"
+    ]
 }

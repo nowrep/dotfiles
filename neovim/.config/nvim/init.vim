@@ -64,8 +64,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 
 " CoC
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
 
 " Games
 Plug 'vim-scripts/TeTrIs.vim'
@@ -91,6 +89,7 @@ let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_min_count = 2
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
+let g:airline#extensions#scrollbar#enabled = 0
 
 " vim-polyglot
 let g:cpp_class_scope_highlight = 1
