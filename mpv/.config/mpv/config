@@ -6,6 +6,7 @@ hwdec = auto
 autofit = 75%x75%
 
 profile = gpu-hq
+gpu-context = x11egl
 scale = ewa_lanczossharp
 cscale = ewa_lanczossharp
 
@@ -14,9 +15,6 @@ volume = 100
 audio-channels = 2
 volume-max = 400
 af = scaletempo
-
-# Playback
-cache-default = 400000
 
 # Subtitles
 sub-font = "Noto Sans"
@@ -27,6 +25,8 @@ sub-auto = fuzzy
 sub-file-paths = subtitles:subtitle:subs:sub
 sub-codepage = enca:cs:cp1250
 
+screenshot-directory=/home/david/Pictures/mpv
+
 # Terminal output
 msg-module = yes
 msg-color = yes
@@ -36,14 +36,8 @@ ytdl-format=bestvideo+bestaudio/best
 
 [protocol.https]
 cache=yes
-cache-default=500000
-cache-backbuffer=250000
-cache-secs=100
 user-agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
 
 [protocol.http]
 cache=yes
-cache-default=500000
-cache-backbuffer=250000
-cache-secs=100
 user-agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
