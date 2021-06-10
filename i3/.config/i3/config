@@ -203,6 +203,7 @@ exec --no-startup-id picom -b --experimental-backends --dbus
 exec --no-startup-id redshift
 exec --no-startup-id udiskie
 exec --no-startup-id clipster -d
+exec --no-startup-id ~/.config/i3/evkeybind
 
 exec --no-startup-id /usr/lib/kdeconnectd
 exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
