@@ -141,9 +141,9 @@ bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight +10 -time 200
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -10 -time 200
 
 # Volume controls
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
 
 # Music controls
 bindsym XF86AudioNext exec --no-startup-id mpc next
@@ -171,6 +171,7 @@ hide_edge_borders smart
 assign [class="Firefox"] $ws1
 assign [class="Thunderbird"] $ws10
 assign [instance="Alacritty-weechat"] $ws2
+assign [instance="advanced combat tracker.exe"] $ws4
 
 # Floating
 for_window [class="Pavucontrol"] floating enable
