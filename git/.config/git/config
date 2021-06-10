@@ -6,6 +6,9 @@ signingkey = EBC3FC294452C6D8
 [core]
 excludesfile = ~/.config/git/gitignore
 
+[init]
+defaultBranch = master
+
 [color]
 ui = auto
 
