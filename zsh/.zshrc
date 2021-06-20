@@ -72,6 +72,7 @@ alias pingg='ping -c 3 8.8.8.8'
 alias objdump='objdump -M intel'
 alias hukotvpn="(cd ~/Documents/vpn && sudo openvpn client.conf)"
 alias sway=~/.config/sway/start.sh
+alias radeontop='radeontop -c -T'
 
 # Sudo aliases
 alias sudo="nocorrect sudo "
