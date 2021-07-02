@@ -64,9 +64,6 @@ Plug 'junegunn/seoul256.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 
-" Language Server Protocol
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
-
 " Neosnippet
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
@@ -75,7 +72,6 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neopairs.vim'
-Plug 'zchee/deoplete-jedi'
 
 " Games
 Plug 'vim-scripts/TeTrIs.vim'
@@ -101,6 +97,7 @@ let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_min_count = 2
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
+let g:airline#extensions#scrollbar#enabled = 0
 
 " vim-polyglot
 let g:cpp_class_scope_highlight = 1
@@ -215,7 +212,7 @@ let g:LanguageClient_settingsPath = '~/.config/nvim/languageclientsettings.json'
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
+" let g:deoplete#enable_smart_case = 1
 
 " Echodoc
 let g:echodoc_enable_at_startup = 1
