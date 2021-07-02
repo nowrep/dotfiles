@@ -203,7 +203,7 @@ exec_always --no-startup-id ~/.config/i3/startup.sh
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec_always --no-startup-id ~/.config/i3/keyboard-layout-switcher.py
 exec --no-startup-id ~/.config/i3/pulseaudio-notifier.sh
-exec --no-startup-id compton -b
+exec --no-startup-id picom -b --experimental-backends --dbus
 exec --no-startup-id redshift
 exec --no-startup-id udiskie
 exec --no-startup-id clipster -d
