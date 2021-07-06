@@ -46,7 +46,7 @@ font-2 = Weather Icons:size=12;2
 
 modules-left = i3 mpd-tail openweathermap-simple
 modules-center = xwindow
-modules-right = openvpn xkeyboard volume memory cpu temperature date
+modules-right = openvpn xkeyboard volume memory cpu temperature-cpu temperature-gpu date
 
 tray-position = right
 tray-padding = 1
@@ -57,8 +57,8 @@ tray-offset-y = -2
 ;wm-restack = i3
 ;override-redirect = true
 
-scroll-up = i3wm-wsprev
-scroll-down = i3wm-wsnext
+scroll-up = #i3.prev
+scroll-down = #i3.next
 
 ; cursor-click = pointer
 ; cursor-scroll = ns-resize
@@ -171,15 +171,22 @@ ramp-volume-2 = 
 label-muted = %percentage%%
 label-muted-foreground = ${colors.foreground-alt}
 
-[module/temperature]
+[module/temperature-cpu]
 type = internal/temperature
 warn-temperature = 80
-hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input
-
+hwmon-path = ${env:HWMON_CPU_PATH}
 format-prefix = " "
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.secondary}
 
-label = %temperature%
-label-warn = %temperature%
+[module/temperature-gpu]
+type = internal/temperature
+warn-temperature = 90
+hwmon-path = ${env:HWMON_GPU_PATH}
+format-prefix = " "
+label = %temperature-c%
+label-warn = %temperature-c%
 label-warn-foreground = ${colors.secondary}
 
 [settings]
