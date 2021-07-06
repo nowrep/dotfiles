@@ -15,6 +15,7 @@ export NO_AT_BRIDGE=1
 export WINEDLLOVERRIDES=winemenubuilder.exe=d
 
 export OBS_USE_EGL=1
+export MOZ_X11_EGL=1
 
 # i3
 if [ "$XDG_CURRENT_DESKTOP" = "i3" ]; then
