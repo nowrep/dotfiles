@@ -20,6 +20,10 @@ password=$(printf '%s\n' "${password_files[@]}" | rofi -dmenu "$@" -i -p passmen
 if [[ $typeit -eq 0 ]]; then
     pass show -c "$password" 2>/dev/null
 else
-    pass show "$password" | { IFS= read -r pass; printf %s "$pass"; } |
-    xdotool type --clearmodifiers --file -
+    p=$(pass show "$password" | { IFS= read -r pass; printf %s "$pass"; })
+    if [ "$XDG_SESSION_TYPE" = "x11" ]; then
+        xdotool type --clearmodifiers "$p"
+    elif [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+        wtype "$p"
+    fi
 fi
