@@ -19,11 +19,6 @@ export MOZ_X11_EGL=1
 
 # i3
 if [ "$XDG_CURRENT_DESKTOP" = "i3" ]; then
-    # PAM KWallet environment
-    if test -n "$PAM_KWALLET5_LOGIN" ; then
-        env | socat STDIN UNIX-CONNECT:$PAM_KWALLET5_LOGIN
-    fi
-
     # Language
     export LANG=en_US.UTF-8
     export LANGUAGE=en_US
@@ -37,7 +32,7 @@ if [ "$XDG_CURRENT_DESKTOP" = "i3" ]; then
     export QT_QPA_PLATFORMTHEME="qt5ct"
 
     # ssh-agent
-    export SSH_ASKPASS=/usr/bin/ksshaskpass
+    export SSH_ASKPASS=/home/david/.ssh/askpass.sh
     eval $(ssh-agent)
     ssh-add ~/.ssh/id_ed25519 ~/.ssh/id_rsa < /dev/null
 fi
