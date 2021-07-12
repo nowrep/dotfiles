@@ -3,3 +3,4 @@ autoload
 lvimrc_persistent
 plugged
 vimwiki
+packer_compiled.lua
