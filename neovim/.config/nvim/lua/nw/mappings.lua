@@ -8,7 +8,7 @@ vim.api.nvim_set_keymap('n', '<C-L>', ':nohl<CR><C-L>', { noremap = true })
 
 -- " Switch opened files with <C-N> and <C-P> in normal mode
 vim.api.nvim_set_keymap('n', '<C-N>', ':bnext<Enter>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-P>', ':bnext<Enter>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-P>', ':bprev<Enter>', { noremap = true })
 
 -- " This is totally awesome - remap jj to escape in insert mode.
 -- " You'll never type jj anyway, so it's great!
