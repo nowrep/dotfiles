@@ -4,21 +4,27 @@ return require('packer').startup(function()
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
-    use 'vim-airline/vim-airline-themes'
-    use { 'vim-airline/vim-airline',
+    use { 'hoob3rt/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
         config = function()
-            vim.g.airline_theme = 'hybridline'
-            vim.g.airline_symbols = { branch = '±' }
-            vim.g.airline_powerline_fonts = 1
-            vim.g.airline_exclude_preview = 1
-            vim.g.airline_inactive_collapse = 0
-            vim.g['airline#extensions#hunks#non_zero_only'] = 1
-            vim.g['airline#extensions#tabline#enabled'] = 1
-            vim.g['airline#extensions#tabline#buffer_min_count'] = 2
-            vim.g['airline#extensions#whitespace#mixed_indent_algo'] = 1
-            vim.g['airline#extensions#scrollbar#enabled'] = 0
-            vim.g.airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-            vim.g.airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+            require 'nw.lualine'
+        end
+    }
+
+    use { 'akinsho/nvim-bufferline.lua',
+        requires = 'kyazdani42/nvim-web-devicons',
+        config = function()
+            require("bufferline").setup({
+                options = {
+                    show_close_icon = false,
+                    show_buffer_close_icons = false
+                },
+                highlights = {
+                    buffer_selected = {
+                        gui = "bold"
+                    },
+                }
+            })
         end
     }
 
@@ -212,6 +218,7 @@ return require('packer').startup(function()
     }
 
     use { 'kyazdani42/nvim-tree.lua',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
         cmd = { 'NvimTreeToggle' },
         keys = { '<Leader>t' },
         config = function()
@@ -226,20 +233,17 @@ return require('packer').startup(function()
             vim.api.nvim_set_keymap('n', '<Leader>t', ':NvimTreeToggle<CR>', { noremap = true })
         end
     }
-    use { 'kyazdani42/nvim-web-devicons',
-        after = 'nvim-tree.lua'
-    }
 
     -- CoC
     use { 'neoclide/coc.nvim',
-    branch = 'release',
-    config = function()
-    vim.api.nvim_set_keymap('i', '<TAB>', [[pumvisible() ? coc#_select_confirm() : "\<C-g>u\<TAB>"]], { noremap = true, silent = true, expr = true })
-    vim.api.nvim_set_keymap('n', 'K', ':call CocAction("doHover")<CR>', { noremap = true, silent = true })
-    vim.api.nvim_set_keymap('n', '<F2>', ':call CocAction("jumpDefinition")<CR>', { noremap = true, silent = true })
-    vim.api.nvim_set_keymap('n', '<F3>', ':call CocAction("rename")<CR>', { noremap = true, silent = true })
-    vim.api.nvim_set_keymap('n', '<F5>', ':call CocAction("doQuickfix")<CR>', { noremap = true, silent = true })
-    end
+        branch = 'release',
+        config = function()
+            vim.api.nvim_set_keymap('i', '<TAB>', [[pumvisible() ? coc#_select_confirm() : "\<C-g>u\<TAB>"]], { noremap = true, silent = true, expr = true })
+            vim.api.nvim_set_keymap('n', 'K', ':call CocAction("doHover")<CR>', { noremap = true, silent = true })
+            vim.api.nvim_set_keymap('n', '<F2>', ':call CocAction("jumpDefinition")<CR>', { noremap = true, silent = true })
+            vim.api.nvim_set_keymap('n', '<F3>', ':call CocAction("rename")<CR>', { noremap = true, silent = true })
+            vim.api.nvim_set_keymap('n', '<F5>', ':call CocAction("doQuickfix")<CR>', { noremap = true, silent = true })
+        end
     }
 
     -- Games

@@ -70,7 +70,6 @@ vim.opt.number = true
 -- Wildignore
 vim.opt.wildignore:append({
     '*/tmp/*',
-    '*.so,',
     '*.swp',
     '*.zip',
     '*.pyc',
