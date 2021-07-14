@@ -175,18 +175,16 @@ label-muted-foreground = ${colors.foreground-alt}
 type = internal/temperature
 warn-temperature = 80
 hwmon-path = ${env:HWMON_CPU_PATH}
-format-prefix = " "
-label = %temperature-c%
-label-warn = %temperature-c%
+label = " %temperature-c%"
+label-warn = " %temperature-c%"
 label-warn-foreground = ${colors.secondary}
 
 [module/temperature-gpu]
 type = internal/temperature
 warn-temperature = 90
 hwmon-path = ${env:HWMON_GPU_PATH}
-format-prefix = " "
-label = %temperature-c%
-label-warn = %temperature-c%
+label = " %temperature-c%"
+label-warn = " %temperature-c%"
 label-warn-foreground = ${colors.secondary}
 
 [settings]
