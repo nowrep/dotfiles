@@ -1,6 +1,6 @@
 vim.cmd [[packadd packer.nvim]]
 
-return require('packer').startup(function()
+return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
@@ -214,6 +214,9 @@ return require('packer').startup(function()
             vim.cmd('hi GitGutterChange guibg=none ctermbg=none')
             vim.cmd('hi GitGutterDelete guibg=none ctermbg=none')
             vim.cmd('hi GitGutterChangeDelete guibg=none ctermbg=none')
+            -- LSP
+            vim.cmd('highlight! link LspDiagnosticsSignError Exception')
+            vim.cmd('highlight! link LspDiagnosticsSignWarning WarningMsg')
         end
     }
 
@@ -234,17 +237,111 @@ return require('packer').startup(function()
         end
     }
 
-    -- CoC
-    use { 'neoclide/coc.nvim',
-        branch = 'release',
+    use { 'neovim/nvim-lspconfig',
         config = function()
-            vim.api.nvim_set_keymap('i', '<TAB>', [[pumvisible() ? coc#_select_confirm() : "\<C-g>u\<TAB>"]], { noremap = true, silent = true, expr = true })
-            vim.api.nvim_set_keymap('n', 'K', ':call CocAction("doHover")<CR>', { noremap = true, silent = true })
-            vim.api.nvim_set_keymap('n', '<F2>', ':call CocAction("jumpDefinition")<CR>', { noremap = true, silent = true })
-            vim.api.nvim_set_keymap('n', '<F3>', ':call CocAction("rename")<CR>', { noremap = true, silent = true })
-            vim.api.nvim_set_keymap('n', '<F5>', ':call CocAction("doQuickfix")<CR>', { noremap = true, silent = true })
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            capabilities.textDocument.completion.completionItem.snippetSupport = true
+            local lspconfig = require 'lspconfig'
+            lspconfig.ccls.setup {
+                init_options = {
+                    cache = {
+                        directory = '/tmp/ccls'
+                    }
+                },
+                capabilities = capabilities
+            }
+            local runtime_path = vim.split(package.path, ';')
+            table.insert(runtime_path, "lua/?.lua")
+            table.insert(runtime_path, "lua/?/init.lua")
+            lspconfig.sumneko_lua.setup {
+                cmd = { '/usr/bin/lua-language-server', '-E', '/usr/share/lua-language-server/main.lua' },
+                settings = {
+                    Lua = {
+                        runtime = {
+                            version = 'LuaJIT',
+                            path = runtime_path
+                        },
+                        diagnostics = {
+                            globals = { 'vim' },
+                            disable = { 'lowercase-global' }
+                        },
+                        workspace = {
+                            library = vim.api.nvim_get_runtime_file('', true)
+                        },
+                        telemetry = {
+                            enable = false
+                        }
+                    }
+                },
+                capabilities = capabilities
+            }
         end
     }
+
+    use { 'glepnir/lspsaga.nvim',
+        config = function()
+            require 'lspsaga'.init_lsp_saga {
+                error_sign = '',
+                warn_sign = '',
+                hint_sign = '',
+                infor_sign = '',
+                code_action_prompt = {
+                    sign = false
+                }
+            }
+            vim.api.nvim_set_keymap('n', 'K', ':Lspsaga hover_doc<CR>', { noremap = true, silent = true })
+            vim.api.nvim_set_keymap('n', '<F5>', ':Lspsaga code_action<CR>', { noremap = true, silent = true })
+            vim.api.nvim_set_keymap('n', '<F3>', ':Lspsaga rename<CR>', { noremap = true, silent = true })
+            vim.api.nvim_set_keymap('n', '<F2>', ':Lspsaga lsp_finder<CR>', { noremap = true, silent = true })
+        end
+    }
+
+    use { 'hrsh7th/nvim-compe',
+        config = function()
+            vim.opt.completeopt = { 'menuone' , 'noselect' }
+
+            require 'compe'.setup {
+                enabled = true,
+                autocomplete = true,
+                source = {
+                    path = true,
+                    buffer = true,
+                    nvim_lsp = true,
+                    nvim_lua = { 'lua' },
+                    vsnip = true
+                }
+            }
+
+            local t = function(str)
+                return vim.api.nvim_replace_termcodes(str, true, true, true)
+            end
+
+            _G.tab_complete = function()
+                if vim.fn['vsnip#available'](1) == 1 then
+                    return t "<Plug>(vsnip-expand-or-jump)"
+                elseif vim.fn.pumvisible() == 1 then
+                    return vim.fn['compe#confirm']({ keys = '<CR>', select = true })
+                else
+                    return t "<Tab>"
+                end
+            end
+
+            _G.s_tab_complete = function()
+                if vim.fn['vsnip#jumpable'](-1) == 1 then
+                    return t "<Plug>(vsnip-jump-prev)"
+                else
+                    return t "<S-Tab>"
+                end
+            end
+
+            vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", { expr = true })
+            vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", { expr = true })
+            vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
+            vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
+        end
+    }
+
+    use { 'hrsh7th/vim-vsnip' }
 
     -- Games
     use { 'mattn/flappyvird-vim', cmd = { 'FlappyVird' } }

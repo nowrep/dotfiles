@@ -101,9 +101,6 @@ vim.opt.linebreak = true
 -- Automatically reload changed files
 vim.opt.autoread = true
 
--- Don't use preview window for completions
-vim.opt.completeopt:remove({'preview'})
-
 vim.opt.modeline = true
 vim.opt.modelines = 5
 

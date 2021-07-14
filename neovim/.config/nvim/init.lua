@@ -4,6 +4,7 @@
 vim.g.mapleader = ' '
 
 -- Load plugins
+vim.cmd [[autocmd BufWritePost plugins.lua source <afile> | PackerCompile]]
 require 'nw.plugins'
 
 -- Settings
