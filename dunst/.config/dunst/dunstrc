@@ -44,7 +44,7 @@ icon_path = /usr/share/icons/hicolor/32x32/apps
 
 [shortcuts]
 close = ctrl+space
-context = ctrl+shift+space
+history = ctrl+shift+space
 
 [urgency_low]
 background = "#282828"
