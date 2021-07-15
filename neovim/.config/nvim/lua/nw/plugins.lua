@@ -7,7 +7,15 @@ return require('packer').startup(function(use)
     use { 'hoob3rt/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true },
         config = function()
-            require 'nw.lualine'
+            require 'lualine'.setup {
+                options = {
+                    theme = 'jellybeans'
+                },
+                sections = {
+                    lualine_c = { 'diagnostics', sources = { 'nvim_lsp' } }
+                },
+                extensions = { 'nvim-tree', 'quickfix' }
+            }
         end
     }
 
@@ -200,23 +208,10 @@ return require('packer').startup(function(use)
         end
     }
 
-    -- Color schemes
-    use { 'junegunn/seoul256.vim',
+    use { 'shaunsingh/seoul256.nvim',
         config = function()
-            vim.opt.background = 'dark'
-            vim.cmd('colorscheme seoul256')
-            -- Transparent background
-            vim.cmd('hi Normal guibg=none ctermbg=none')
-            vim.cmd('hi NonText guibg=none ctermbg=none')
-            vim.cmd('hi LineNr guibg=none ctermbg=none')
-            vim.cmd('hi VertSplit guibg=none ctermbg=none')
-            vim.cmd('hi GitGutterAdd guibg=none ctermbg=none')
-            vim.cmd('hi GitGutterChange guibg=none ctermbg=none')
-            vim.cmd('hi GitGutterDelete guibg=none ctermbg=none')
-            vim.cmd('hi GitGutterChangeDelete guibg=none ctermbg=none')
-            -- LSP
-            vim.cmd('highlight! link LspDiagnosticsSignError Exception')
-            vim.cmd('highlight! link LspDiagnosticsSignWarning WarningMsg')
+            vim.g.seoul256_disable_background = true
+            require('seoul256').set()
         end
     }
 
