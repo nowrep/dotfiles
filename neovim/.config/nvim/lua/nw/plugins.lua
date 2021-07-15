@@ -144,6 +144,7 @@ return require('packer').startup(function(use)
     use { 'airblade/vim-gitgutter',
         config = function()
             vim.g.gitgutter_map_keys = 0
+            vim.g.gitgutter_sign_priority = 1
         end
     }
     use { 'rking/ag.vim', cmd = { 'LAg' } }
@@ -337,6 +338,19 @@ return require('packer').startup(function(use)
     }
 
     use { 'hrsh7th/vim-vsnip' }
+
+    use { 'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate',
+        config = function()
+            require'nvim-treesitter.configs'.setup {
+                ensure_installed = 'maintained',
+                highlight = {
+                    enable = true,
+                    additional_vim_regex_highlighting = false
+                }
+            }
+        end
+    }
 
     -- Games
     use { 'mattn/flappyvird-vim', cmd = { 'FlappyVird' } }
