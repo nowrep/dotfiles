@@ -4,37 +4,58 @@ return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
-    use { 'hoob3rt/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    -- use { 'hoob3rt/lualine.nvim',
+    --     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    --     config = function()
+    --         require 'lualine'.setup {
+    --             options = {
+    --                 theme = 'jellybeans'
+    --             },
+    --             sections = {
+    --                 lualine_c = { 'diagnostics', sources = { 'nvim_lsp' } }
+    --             },
+    --             extensions = { 'nvim-tree', 'quickfix' }
+    --         }
+    --     end
+    -- }
+
+    use 'vim-airline/vim-airline-themes'
+    use { 'vim-airline/vim-airline',
         config = function()
-            require 'lualine'.setup {
-                options = {
-                    theme = 'jellybeans'
-                },
-                sections = {
-                    lualine_c = { 'diagnostics', sources = { 'nvim_lsp' } }
-                },
-                extensions = { 'nvim-tree', 'quickfix' }
-            }
+            vim.g.airline_theme = 'hybridline'
+            if vim.g.airline_symbols == nil then
+                vim.g.airline_symbols = { branch = '±' }
+            end
+            vim.g.airline_powerline_fonts = 1
+            vim.g.airline_exclude_preview = 1
+            vim.g.airline_inactive_collapse = 0
+            vim.g['airline#extensions#hunks#non_zero_only'] = 1
+            vim.g['airline#extensions#tabline#enabled'] = 1
+            vim.g['airline#extensions#tabline#buffer_min_count'] = 2
+            vim.g['airline#extensions#whitespace#mixed_indent_algo'] = 1
+            vim.g['airline#extensions#scrollbar#enabled'] = 0
+            vim.g['airline#extensions#nvimlsp#enabled'] = 1
+            vim.g['airline#extensions#nvimlsp#error_symbol'] = ''
+            vim.g['airline#extensions#nvimlsp#warning_symbol'] = ''
         end
     }
 
-    use { 'akinsho/nvim-bufferline.lua',
-        requires = 'kyazdani42/nvim-web-devicons',
-        config = function()
-            require("bufferline").setup({
-                options = {
-                    show_close_icon = false,
-                    show_buffer_close_icons = false
-                },
-                highlights = {
-                    buffer_selected = {
-                        gui = "bold"
-                    },
-                }
-            })
-        end
-    }
+    -- use { 'akinsho/nvim-bufferline.lua',
+    --     requires = 'kyazdani42/nvim-web-devicons',
+    --     config = function()
+    --         require("bufferline").setup({
+    --             options = {
+    --                 show_close_icon = false,
+    --                 show_buffer_close_icons = false
+    --             },
+    --             highlights = {
+    --                 buffer_selected = {
+    --                     gui = "bold"
+    --                 },
+    --             }
+    --         })
+    --     end
+    -- }
 
     use { 'sheerun/vim-polyglot',
         config = function()
@@ -209,27 +230,54 @@ return require('packer').startup(function(use)
         end
     }
 
-    use { 'shaunsingh/seoul256.nvim',
+    use { 'junegunn/seoul256.vim',
         config = function()
-            vim.g.seoul256_disable_background = true
-            require('seoul256').set()
+            vim.opt.background = 'dark'
+            vim.cmd('colorscheme seoul256')
+            -- Transparent background
+            vim.cmd('hi Normal guibg=none ctermbg=none')
+            vim.cmd('hi NonText guibg=none ctermbg=none')
+            vim.cmd('hi LineNr guibg=none ctermbg=none')
+            vim.cmd('hi VertSplit guibg=none ctermbg=none')
+            vim.cmd('hi SignColumn guibg=none ctermbg=none')
+            vim.cmd('hi GitGutterAdd guibg=none ctermbg=none')
+            vim.cmd('hi GitGutterChange guibg=none ctermbg=none')
+            vim.cmd('hi GitGutterDelete guibg=none ctermbg=none')
+            vim.cmd('hi GitGutterChangeDelete guibg=none ctermbg=none')
         end
     }
 
-    use { 'kyazdani42/nvim-tree.lua',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-        cmd = { 'NvimTreeToggle' },
+    -- use { 'shaunsingh/seoul256.nvim',
+    --     config = function()
+    --         vim.g.seoul256_disable_background = true
+    --         require('seoul256').set()
+    --     end
+    -- }
+
+    -- use { 'kyazdani42/nvim-tree.lua',
+    --     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    --     cmd = { 'NvimTreeToggle' },
+    --     keys = { '<Leader>t' },
+    --     config = function()
+    --         vim.g.nvim_tree_width = 20
+    --         vim.g.nvim_tree_auto_close = 1
+    --         vim.g.nvim_tree_show_icons = {
+    --             git = 1,
+    --             folders = 1,
+    --             files = 1,
+    --             folder_arrows = 0
+    --         }
+    --         vim.api.nvim_set_keymap('n', '<Leader>t', ':NvimTreeToggle<CR>', { noremap = true })
+    --     end
+    -- }
+
+    use { 'scrooloose/nerdtree',
+        requires = { 'Xuyuanp/nerdtree-git-plugin', opt = true },
+        cmd = {'NERDTreeToggle'},
         keys = { '<Leader>t' },
         config = function()
-            vim.g.nvim_tree_width = 20
-            vim.g.nvim_tree_auto_close = 1
-            vim.g.nvim_tree_show_icons = {
-                git = 1,
-                folders = 1,
-                files = 1,
-                folder_arrows = 0
-            }
-            vim.api.nvim_set_keymap('n', '<Leader>t', ':NvimTreeToggle<CR>', { noremap = true })
+            vim.g.NERDTreeWinSize = 20
+            vim.api.nvim_set_keymap('n', '<Leader>t', ':NERDTreeToggle<CR>', { noremap = true })
         end
     }
 
@@ -339,18 +387,18 @@ return require('packer').startup(function(use)
 
     use { 'hrsh7th/vim-vsnip' }
 
-    use { 'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate',
-        config = function()
-            require'nvim-treesitter.configs'.setup {
-                ensure_installed = 'maintained',
-                highlight = {
-                    enable = true,
-                    additional_vim_regex_highlighting = false
-                }
-            }
-        end
-    }
+    -- use { 'nvim-treesitter/nvim-treesitter',
+    --     run = ':TSUpdate',
+    --     config = function()
+    --         require'nvim-treesitter.configs'.setup {
+    --             ensure_installed = 'maintained',
+    --             highlight = {
+    --                 enable = true,
+    --                 additional_vim_regex_highlighting = false
+    --             }
+    --         }
+    --     end
+    -- }
 
     -- Games
     use { 'mattn/flappyvird-vim', cmd = { 'FlappyVird' } }
