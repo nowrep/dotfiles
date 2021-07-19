@@ -14,11 +14,8 @@ export NO_AT_BRIDGE=1
 # WINE!
 export WINEDLLOVERRIDES=winemenubuilder.exe=d
 
-export OBS_USE_EGL=1
-export MOZ_X11_EGL=1
-
-# i3
-if [ "$XDG_CURRENT_DESKTOP" = "i3" ]; then
+# i3/sway
+if [ "$XDG_CURRENT_DESKTOP" = "i3" -o "$XDG_SESSION_TYPE" = "wayland" ]; then
     # Language
     export LANG=en_US.UTF-8
     export LANGUAGE=en_US
@@ -31,8 +28,19 @@ if [ "$XDG_CURRENT_DESKTOP" = "i3" ]; then
     # Qt platform theme
     export QT_QPA_PLATFORMTHEME="qt5ct"
 
+    export OBS_USE_EGL=1
+    export MOZ_X11_EGL=1
+
     # ssh-agent
     export SSH_ASKPASS=/home/david/.ssh/askpass.sh
     eval $(ssh-agent)
-    ssh-add ~/.ssh/id_ed25519 ~/.ssh/id_rsa < /dev/null
+    # ssh-add ~/.ssh/id_ed25519 ~/.ssh/id_rsa < /dev/null
+fi
+
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    export QT_QPA_PLATFORM="wayland;xcb"
+    export QT_WAYLAND_FORCE_DPI=115
+    export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+
+    export MOZ_ENABLE_WAYLAND=1
 fi

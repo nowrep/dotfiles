@@ -1,5 +1,5 @@
 [global]
-font = Noto Sans 9
+font = Noto Sans 10.5
 markup = yes
 
 # The format of the message.  Possible variables are:
@@ -19,7 +19,7 @@ bounce_freq = 0
 show_age_threshold = 60
 word_wrap = yes
 ignore_newline = no
-geometry = "400x5-15+50"
+geometry = "400x5-15+14"
 shrink = no
 transparency = 15
 idle_threshold = 120
@@ -47,16 +47,16 @@ close = ctrl+space
 history = ctrl+shift+space
 
 [urgency_low]
-background = "#282828"
+background = "#282828e0"
 foreground = "#dfdfdf"
 timeout = 5
 
 [urgency_normal]
-background = "#282828"
+background = "#282828e0"
 foreground = "#dfdfdf"
 timeout = 5
 
 [urgency_critical]
-background = "#282828"
+background = "#282828e0"
 foreground = "#dfdfdf"
 timeout = 5
