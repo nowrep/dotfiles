@@ -1,0 +1,113 @@
+[
+    {
+        "name": "main",
+        "layer": "top",
+        "position": "top",
+        "margin": "0 2",
+        "modules-left": [
+            "sway/workspaces",
+            "sway/mode",
+            "custom/mpd-tail",
+            "custom/openweathermap-simple"
+        ],
+        "modules-center": [ "sway/window" ],
+        "modules-right": [
+            "custom/openvpn",
+            "sway/language",
+            "pulseaudio",
+            "memory",
+            "cpu",
+            "temperature#cpu",
+            "temperature#gpu",
+            "tray",
+            "clock"
+        ],
+        "sway/workspaces": {
+            "format": "{icon}",
+            "format-icons": {
+                "1": "",
+                "2": "",
+                "3": "",
+                "4": "",
+                "5": "",
+                "6": "",
+                "7": "",
+                "8": "",
+                "9": "",
+                "10": ""
+            },
+            "disable-scroll-wraparound": true,
+            "enable-bar-scroll": true
+        },
+        "custom/mpd-tail": {
+            "tooltip": false,
+            "exec": "$HOME/.config/waybar/mpd-tail.sh",
+            "restart-interval": 5,
+            "max-length": 45
+        },
+        "custom/openweathermap-simple": {
+            "tooltip": false,
+            "exec": "$HOME/.config/waybar/openweathermap-simple.sh",
+            "interval": 600
+        },
+        "sway/window": {
+            "tooltip": false,
+            "format": "{}",
+            "max-length": 150
+        },
+        "custom/openvpn": {
+            "tooltip": false,
+            "interval": 5,
+            "exec": "pgrep openvpn && echo vpn",
+            "format": "",
+        },
+        "sway/language": {
+            "tooltip": false,
+            "format": "  {}"
+        },
+        "pulseaudio": {
+            "tooltip": false,
+            "scroll-step": 5,
+            "format": "{icon} {volume}%",
+            "format-icons": {
+                "default": ["", "", ""]
+            }
+        },
+        "memory": {
+            "tooltip": false,
+            "interval": 2,
+            "format": " {}%"
+        },
+        "cpu": {
+            "tooltip": false,
+            "interval": 2,
+            "format": " {usage}%"
+        },
+        "temperature#cpu": {
+            "tooltip": false,
+            "interval": 2,
+            "hwmon-path": "/tmp/waybar/cpu_temp",
+            "critical-threshold": 80,
+            "format": " {temperatureC}°C",
+            "format-critical": " {temperatureC}°C"
+        },
+        "temperature#gpu": {
+            "tooltip": false,
+            "interval": 2,
+            "hwmon-path": "/tmp/waybar/gpu_temp",
+            "critical-threshold": 90,
+            "format": " {temperatureC}°C",
+            "format-critical": " {temperatureC}°C"
+        },
+        "tray": {
+            "icon-size": 20,
+            "spacing": 5
+        },
+        "clock": {
+            "interval": 5,
+            "format": " {:%H:%M}",
+            "format-alt": " {:%H:%M:%S %d.%m.%Y}",
+            "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+        },
+    }
+]

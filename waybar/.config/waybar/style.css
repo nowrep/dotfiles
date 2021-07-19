@@ -1,0 +1,138 @@
+* {
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+
+window#waybar
+{
+    color: #dfdfdf;
+    background-color: rgba(33, 33, 30, 0.5);
+    border: 2px solid rgba(0, 0, 0, 0);
+    border-radius: 5px;
+    font-family: "Knack Nerd Font";
+    font-size: 11pt;
+}
+
+#workspaces
+{
+    margin: 7px 6px 6px 10px;
+}
+
+#workspaces button
+{
+    padding: 0 10px;
+    background: none;
+    color: #dfdfdf;
+}
+
+#workspaces button:hover
+{
+    box-shadow: none;
+}
+
+#workspaces button.focused
+{
+    color: #3fc7ff;
+}
+
+#workspaces button.urgent
+{
+    color: #bd2c40;
+}
+
+#mode {
+    background-color: #3fc7ff;
+    color: #000000;
+    font-family: "Noto Sans";
+    font-size: 11pt;
+    padding: 0px 12px;
+}
+
+#custom-mpd-tail
+{
+    padding-left: 14px;
+    font-family: "Noto Sans", "Knack Nerd Font";
+    font-size: 11pt;
+}
+
+#custom-openweathermap-simple
+{
+    padding-left: 20px;
+    font-family: "Noto Sans", "Weather Icons";
+    font-size: 11pt;
+}
+
+#window
+{
+    font-family: "Noto Sans";
+    font-size: 11pt;
+}
+
+#custom-openvpn
+{
+    padding-right: 7px;
+}
+
+#language
+{
+    padding-right: 18px;
+}
+
+#pulseaudio
+{
+    padding-right: 18px;
+    min-width: 48px;
+}
+
+#pulseaudio.muted
+{
+    color: #555;
+}
+
+#memory
+{
+    padding-right: 18px;
+}
+
+#cpu
+{
+    padding-right: 18px;
+    min-width: 48px;
+}
+
+#temperature.cpu
+{
+    padding-right: 18px;
+}
+
+#temperature.cpu.critical
+{
+    color: #e60053;
+}
+
+#temperature.gpu
+{
+    padding-right: 18px;
+}
+
+#temperature.gpu.critical
+{
+    color: #e60053;
+}
+
+#clock
+{
+    padding-right: 10px;
+}
+
+#tray
+{
+    padding-right: 18px;
+}
+
+#tray menu
+{
+    font-family: "Noto Sans";
+    font-size: 10.5pt;
+}
