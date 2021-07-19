@@ -285,8 +285,20 @@ return require('packer').startup(function(use)
         config = function()
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+            local on_attach = function(client, bufnr)
+                local opts = { noremap = true, silent = true }
+                vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+                vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', ':Lspsaga hover_doc<CR>', opts)
+                vim.api.nvim_buf_set_keymap(bufnr, 'n', '<F2>', ':lua vim.lsp.buf.definition()<CR>', opts)
+                -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<F2>', ':Lspsaga lsp_finder<CR>', opts)
+                vim.api.nvim_buf_set_keymap(bufnr, 'n', '<F3>', ':Lspsaga rename<CR>', opts)
+                vim.api.nvim_buf_set_keymap(bufnr, 'n', '<F5>', ':Lspsaga code_action<CR>', opts)
+            end
+
             local lspconfig = require 'lspconfig'
             lspconfig.ccls.setup {
+                on_attach = on_attach,
                 init_options = {
                     cache = {
                         directory = '/tmp/ccls'
@@ -298,6 +310,7 @@ return require('packer').startup(function(use)
             table.insert(runtime_path, "lua/?.lua")
             table.insert(runtime_path, "lua/?/init.lua")
             lspconfig.sumneko_lua.setup {
+                on_attach = on_attach,
                 cmd = { '/usr/bin/lua-language-server', '-E', '/usr/share/lua-language-server/main.lua' },
                 settings = {
                     Lua = {
@@ -333,10 +346,6 @@ return require('packer').startup(function(use)
                     sign = false
                 }
             }
-            vim.api.nvim_set_keymap('n', 'K', ':Lspsaga hover_doc<CR>', { noremap = true, silent = true })
-            vim.api.nvim_set_keymap('n', '<F5>', ':Lspsaga code_action<CR>', { noremap = true, silent = true })
-            vim.api.nvim_set_keymap('n', '<F3>', ':Lspsaga rename<CR>', { noremap = true, silent = true })
-            vim.api.nvim_set_keymap('n', '<F2>', ':Lspsaga lsp_finder<CR>', { noremap = true, silent = true })
         end
     }
 
