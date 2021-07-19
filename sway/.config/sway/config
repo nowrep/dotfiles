@@ -141,36 +141,39 @@ bindsym $mod+t scratchpad show
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
+# exit sway
+bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your session.' -b 'Yes, exit sway' 'swaymsg exit'"
 
 # Start a terminal
-bindsym $mod+Return exec --no-startup-id $term
+bindsym $mod+Return exec $term
 
 # File manager with mod+e
 bindsym $mod+e exec dolphin
 
 # Screenshots
-bindsym Print exec --no-startup-id ~/.config/sway/screenshot.sh
-bindsym $mod+Print exec --no-startup-id ~/.config/sway/screenshot.sh window
+bindsym Print exec ~/.config/sway/screenshot.sh
+bindsym $mod+Print exec ~/.config/sway/screenshot.sh window
 
 # Start your launcher
-bindsym $mod+d exec --no-startup-id rofi -show drun
-bindsym $mod+o exec --no-startup-id ~/.config/rofi/emoji/emoji-menu.sh
-bindsym $mod+p exec --no-startup-id ~/.config/rofi/passmenu --type
+bindsym $mod+d exec rofi -show drun
+bindsym $mod+o exec ~/.config/rofi/emoji/emoji-menu.sh
+bindsym $mod+p exec ~/.config/rofi/passmenu --type
 
 # Volume controls
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym XF86Explorer exec --no-startup-id ~/.config/sway/pulseaudio-mute-toggle.sh
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86Explorer exec ~/.config/sway/pulseaudio-mute-toggle.sh
 
 # Music controls
-bindsym XF86AudioNext exec --no-startup-id mpc next
-bindsym XF86AudioPrev exec --no-startup-id mpc prev
-bindsym XF86AudioPlay exec --no-startup-id mpc toggle
-bindsym XF86AudioStop exec --no-startup-id mpc stop
+bindsym XF86AudioNext exec mpc next
+bindsym XF86AudioPrev exec mpc prev
+bindsym XF86AudioPlay exec mpc toggle
+bindsym XF86AudioStop exec mpc stop
 
-# Locking
-bindsym $mod+Pause exec --no-startup-id swaylock
+# dunst
+bindsym Ctrl+Space exec dunstctl close
+bindsym Ctrl+Shift+Space exec dunstctl history-pop
 
 # Disable titlebars
 default_border pixel 1
@@ -214,13 +217,13 @@ client.unfocused        $darkblue   $gray      $white    $gray     $gray
 client.focused_inactive $darkblack  $darkblack $white    $gray     $gray
 
 # Startup
-exec --no-startup-id ~/.config/sway/post-start.sh
-exec_always --no-startup-id ~/.config/waybar/launch.sh
-exec_always --no-startup-id ~/.config/sway/keyboard-layout-switcher.py
-exec --no-startup-id ~/.config/sway/pulseaudio-notifier.sh
-exec --no-startup-id udiskie
-exec --no-startup-id wlsunset -l 50.08 -L 14.44
-exec --no-startup-id /usr/lib/kdeconnectd
-exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
+exec ~/.config/sway/post-start.sh
+exec_always ~/.config/waybar/launch.sh
+exec_always ~/.config/sway/keyboard-layout-switcher.py
+exec ~/.config/sway/pulseaudio-notifier.sh
+exec udiskie
+exec wlsunset -l 50.08 -L 14.44
+exec /usr/lib/kdeconnectd
+exec /usr/lib/polkit-kde-authentication-agent-1
 
 workspace $ws1
