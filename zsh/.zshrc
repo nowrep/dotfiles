@@ -12,6 +12,18 @@ plugins=(git archlinux colored-man-pages safe-paste)
 
 source $ZSH/oh-my-zsh.sh
 
+# Track cwd
+osc7_cwd() {
+    printf '\e]7;file://%s%s\e\\' "$(omz_urlencode $HOST)" "$(omz_urlencode "$PWD")"
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook -Uz chpwd osc7_cwd
+
+# foot workaround
+bindkey "\e[27;2;13~" accept-line # shift+return
+bindkey "\e[27;5;13~" accept-line # ctrl+return
+bindkey "\e[27;3;9~" beep # alt+tab
+
 # No shared history
 unsetopt share_history
 
