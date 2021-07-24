@@ -38,9 +38,9 @@ if [ "$XDG_CURRENT_DESKTOP" = "i3" -o "$XDG_SESSION_TYPE" = "wayland" ]; then
 fi
 
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
-    export QT_QPA_PLATFORM="wayland;xcb"
+    export QT_QPA_PLATFORM=wayland
+    export QSG_RENDER_LOOP=windows
     export QT_WAYLAND_FORCE_DPI=115
-    export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 
     export MOZ_ENABLE_WAYLAND=1
 fi

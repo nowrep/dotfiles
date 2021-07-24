@@ -92,5 +92,10 @@
 }
 
 element-icon {
-  size: 2.5ch;
+  size: 2.8ch;
+  padding: 0 0 0 5px;
+}
+
+element-text {
+  padding: 1px 0 0 10px;
 }

@@ -6,7 +6,6 @@ hwdec = auto
 autofit = 75%x75%
 
 profile = gpu-hq
-gpu-context = x11egl
 scale = ewa_lanczossharp
 cscale = ewa_lanczossharp
 

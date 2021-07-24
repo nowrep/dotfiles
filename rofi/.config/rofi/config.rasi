@@ -2,7 +2,7 @@ configuration {
     terminal:    "alacritty";
     theme:       "style.rasi";
     show-icons:  true;
-    modi:        "window,run,drun";
+    modi:        "run,drun";
     width:       40;
     lines:       15;
 }

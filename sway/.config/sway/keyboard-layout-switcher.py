@@ -8,12 +8,13 @@ US_LAYOUT = 0
 KEYBOARD_ID = "65261:38924:TMK._FC980C_Alt_Controller"
 
 cz_window_instances = [
-    "Alacritty-weechat",
+    "foot-weechat",
 ]
 
 us_window_classes = [
     "org.kde.krdc",
     "Alacritty",
+    "foot",
     "assistant", # Qt Assistant
 ]
 
