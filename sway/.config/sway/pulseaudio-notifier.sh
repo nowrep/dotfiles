@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 sink_id=""
 notify_id=100
@@ -10,11 +10,19 @@ icon_muted="/usr/share/icons/breeze-dark/status/22/audio-volume-muted.svg"
 old_volume=-1
 old_muted=false
 
+find_sink() {
+    sink_id=""
+    while [ -z "$sink_id" ]; do
+        sink_id=$(pactl list short sinks  | grep alsa_output.pci-0000_00_1f.3.analog-stereo | cut -f1)
+        sleep 1
+    done
+}
+
 volume_notify() {
     muted=$(pamixer --sink $sink_id --get-mute)
     if [ "$muted" = true ]; then
         if [ "$old_muted" != "$muted" ]; then
-            notify-desktop -r $notify_id -i $icon_muted "Muted"
+            notify-desktop -r $notify_id -i $icon_muted "Muted" > /dev/null
             old_volume=-1
         fi
     else
@@ -27,7 +35,7 @@ volume_notify() {
             else
                 icon=$icon_high
             fi
-            notify-desktop -r $notify_id -i $icon "Volume $volume%"
+            notify-desktop -r $notify_id -i $icon "Volume $volume%" > /dev/null
         fi
         old_volume=$volume
     fi
@@ -47,17 +55,20 @@ recording_indicator() {
 recording_indicator
 
 while true; do
-    while [ -z "$sink_id" ]; do
-        sink_id=$(pactl list short sinks  | grep alsa_output.pci-0000_00_1f.3.analog-stereo | cut -f1)
-        sleep 1
-    done
+    find_sink
     pactl subscribe | while read -r event; do
-        if echo "$event" | grep -q "on sink #${sink_id}"; then
-            volume_notify
-        elif echo "$event" | grep -q "on source #"; then
+        evwhat=$(echo "$event" | cut -d' ' -f2 | tr -d "'")
+        evtype=$(echo "$event" | cut -d' ' -f4)
+        evnum=$(echo "$event" | cut -d'#' -f2)
+        if [ "$evtype" = "sink" -a "$evnum" = "$sink_id" ]; then
+            if [ "$evwhat" = "remove" ]; then
+                find_sink
+            elif [ "$evwhat" = "change" ]; then
+                volume_notify
+            fi
+        elif [ "$evtype" = "source" -a "$evwhat" = "change" ]; then
             recording_indicator
         fi
     done
-    sink_id=""
     sleep 5
 done
