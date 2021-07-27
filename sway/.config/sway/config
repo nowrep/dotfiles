@@ -238,6 +238,7 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
 # Startup
 exec ~/.config/sway/post-start.sh
 exec_always ~/.config/waybar/launch.sh
+exec ~/.config/sway/clip.sh listen
 exec ~/.config/sway/pulseaudio-notifier.sh
 exec ~/.config/sway/keyboard-layout-switcher.py
 exec udiskie
