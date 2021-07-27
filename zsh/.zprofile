@@ -15,7 +15,7 @@ export NO_AT_BRIDGE=1
 export WINEDLLOVERRIDES=winemenubuilder.exe=d
 
 # i3/sway
-if [ "$XDG_CURRENT_DESKTOP" = "i3" -o "$XDG_SESSION_TYPE" = "wayland" ]; then
+if [ "$XDG_CURRENT_DESKTOP" = "i3" -o "$XDG_CURRENT_DESKTOP" = "sway" ]; then
     # Language
     export LANG=en_US.UTF-8
     export LANGUAGE=en_US
@@ -43,4 +43,5 @@ if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
     export QT_WAYLAND_FORCE_DPI=115
 
     export MOZ_ENABLE_WAYLAND=1
+    export SDL_VIDEODRIVER=wayland
 fi

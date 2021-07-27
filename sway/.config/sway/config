@@ -30,16 +30,21 @@ exec swayidle -w \
        resume 'swaymsg "output * dpms on"'
 
 # Input
-input type:keyboard {
+input "65261:38924:TMK._FC980C_Alt_Controller" {
     xkb_layout us,cz
     xkb_options grp:sclk_toggle,numpad:mac
     repeat_delay 200
     repeat_rate 20
 }
 
-input type:pointer {
+input "65261:38924:TMK._FC980C_Alt_Controller_Consumer_Control" {
+    repeat_delay 200
+    repeat_rate 10
+}
+
+input "6899:1:Kingsis_Peripherals_ZOWIE_Gaming_mouse" {
     accel_profile flat
-    pointer_accel 0.35
+    pointer_accel 0.25
 }
 
 font pango:Knack Nerd Font 10.5
@@ -206,8 +211,8 @@ for_window [app_id="weechat-terminal"] opacity 0.97
 
 # Fixes
 for_window [app_id="firefox" title="Open(.*)"] move window to workspace current
-for_window [app_id="transmission-qt" title="Open Torrent from(.*)"] border normal
-for_window [app_id="transmission-qt" title="Open Torrent from(.*)"] floating enable
+for_window [app_id="transmission-qt" title="Open Torrent from(.*)"] floating enable, border normal
+for_window [app_id="polkit-kde-authentication-agent-1"] floating enable, border normal
 
 set $blue #3daee9
 set $darkblue #34495e
@@ -225,11 +230,16 @@ client.focused_inactive $darkblack  $darkblack $white    $gray     $gray
 
 include config_private
 
+# /etc/sway/config.d/50-systemd-user.conf
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+
 # Startup
 exec ~/.config/sway/post-start.sh
 exec_always ~/.config/waybar/launch.sh
-exec_always ~/.config/sway/keyboard-layout-switcher.py
 exec ~/.config/sway/pulseaudio-notifier.sh
+exec ~/.config/sway/keyboard-layout-switcher.py
 exec udiskie
 exec wlsunset -l 50.08 -L 14.44
 exec /usr/lib/kdeconnectd
