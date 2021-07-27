@@ -370,10 +370,10 @@ return require('packer').startup(function(use)
             end
 
             _G.tab_complete = function()
-                if vim.fn['vsnip#available'](1) == 1 then
-                    return t "<Plug>(vsnip-expand-or-jump)"
-                elseif vim.fn.pumvisible() == 1 then
+                if vim.fn.pumvisible() == 1 then
                     return vim.fn['compe#confirm']({ keys = '<CR>', select = true })
+                elseif vim.fn['vsnip#available'](1) == 1 then
+                    return t "<Plug>(vsnip-expand-or-jump)"
                 else
                     return t "<Tab>"
                 end
