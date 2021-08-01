@@ -14,7 +14,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Track cwd
 osc7_cwd() {
-    printf '\e]7;file://%s%s\e\\' "$(omz_urlencode $HOST)" "$(omz_urlencode "$PWD")"
+    printf '\e]7;file://%s%s\e\\' "$(omz_urlencode -P $HOST)" "$(omz_urlencode -P "$PWD")"
 }
 autoload -Uz add-zsh-hook
 add-zsh-hook -Uz chpwd osc7_cwd
@@ -286,7 +286,11 @@ function run-scaled {
 }
 
 function record-desktop {
-    ffmpeg -video_size 2560x1440 -draw_mouse 0 -framerate 30 -f x11grab -i :0.0+0,0 -f pulse -ac 2 -i alsa_output.pci-0000_00_1f.3.analog-stereo.monitor output.mkv
+    if [ -z "$WAYLAND_DISPLAY" ]; then
+        wf-recorder -a"alsa_output.pci-0000_00_1f.3.analog-stereo.monitor" -p preset=superfast
+    else
+        ffmpeg -video_size 2560x1440 -draw_mouse 0 -framerate 30 -f x11grab -i :0.0+0,0 -f pulse -ac 2 -i alsa_output.pci-0000_00_1f.3.analog-stereo.monitor output.mkv
+    fi
 }
 
 function stream-sink {
