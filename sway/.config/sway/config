@@ -180,6 +180,9 @@ bindsym XF86AudioStop exec mpc stop
 bindsym Ctrl+Space exec dunstctl close
 bindsym Ctrl+Shift+Space exec dunstctl history-pop
 
+# obs
+bindsym Ctrl+KP_Enter exec ~/.config/sway/obs.sh replay-buffer
+
 # Disable titlebars
 default_border pixel 1
 
