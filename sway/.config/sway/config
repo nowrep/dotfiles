@@ -111,12 +111,12 @@ bindsym --to-code $mod+Shift+0 move container to workspace $ws10
 mode "window" {
     bindsym s split v; mode "default"
     bindsym v split h; mode "default"
-    bindsym comma resize shrink width 9 px or 9 ppt
-    bindsym period resize grow width 8 px or 9 ppt
-    bindcode 21 resize grow height 8 px or 9 ppt
-    bindcode 20 resize shrink height 9 px or 9 ppt
-    # bindsym equal resize grow height 8 px or 9 ppt
-    # bindsym minus resize shrink height 9 px or 9 ppt
+    bindsym comma resize shrink width 20
+    bindsym period resize grow width 20
+    bindcode 21 resize grow height 20
+    bindcode 20 resize shrink height 20
+    # bindsym equal resize grow height 20
+    # bindsym minus resize shrink height 20
     # Leave window mode with return/escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
