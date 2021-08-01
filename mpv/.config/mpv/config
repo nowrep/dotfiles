@@ -3,11 +3,13 @@
 
 # Video
 hwdec = auto
+gpu-api = vulkan
 autofit = 75%x75%
 
 profile = gpu-hq
 scale = ewa_lanczossharp
-cscale = ewa_lanczossharp
+cscale = ewa_lanczossoft
+framedrop = no
 
 # Audio
 volume = 100
