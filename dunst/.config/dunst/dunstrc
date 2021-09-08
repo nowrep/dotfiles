@@ -24,7 +24,6 @@ shrink = no
 transparency = 15
 idle_threshold = 120
 monitor = 0
-follow = mouse
 sticky_history = yes
 history_length = 20
 show_indicators = yes
