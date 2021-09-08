@@ -3,6 +3,4 @@ configuration {
     theme:       "style.rasi";
     show-icons:  true;
     modi:        "run,drun";
-    width:       40;
-    lines:       15;
 }
