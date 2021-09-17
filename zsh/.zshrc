@@ -310,5 +310,17 @@ function stream-sink {
     pw-link 'stream_sink:monitor_FR' 'alsa_output.pci-0000_00_1f.3.analog-stereo:playback_FR'
 }
 
+function tv-enable {
+    swaymsg 'output HDMI-A-3 enable'
+    swaymsg 'seat seat0 pointer_constraint disable'
+    xoutput=$(xrandr -q | grep XWAYLAND | grep -v XWAYLAND0 | cut -d' ' -f1)
+    xrandr --output $xoutput --primary
+}
+
+function tv-disable {
+    swaymsg 'output HDMI-A-3 disable'
+    swaymsg 'seat seat0 pointer_constraint enable'
+}
+
 # Private
 source ~/.zshrc_private
