@@ -9,7 +9,11 @@ autofit = 75%x75%
 profile = gpu-hq
 scale = ewa_lanczossharp
 cscale = ewa_lanczossoft
-framedrop = no
+gamma-factor = 1.1
+video-sync = display-resample
+af = scaletempo2
+interpolation = yes
+interpolation-threshold = 1
 
 # Audio
 volume = 100
