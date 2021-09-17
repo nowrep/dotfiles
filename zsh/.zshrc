@@ -64,7 +64,7 @@ export GPG_TTY=$(tty)
 alias ls="exa"
 alias ll="ls -l"
 alias monitor_off="xset dpms force off"
-alias grep="grep --color=auto --line-number"
+alias grep="grep --color=auto"
 alias cdq="cd ~/Programming/Qt-C++/QupZilla"
 alias cdf="cd ~/Programming/Qt-C++/falkon"
 alias cdk="cd /media/Data/KDE"
@@ -286,7 +286,7 @@ function run-scaled {
 }
 
 function record-desktop {
-    if [ -z "$WAYLAND_DISPLAY" ]; then
+    if [ -n "$WAYLAND_DISPLAY" ]; then
         wf-recorder -a"alsa_output.pci-0000_00_1f.3.analog-stereo.monitor" -p preset=superfast
     else
         ffmpeg -video_size 2560x1440 -draw_mouse 0 -framerate 30 -f x11grab -i :0.0+0,0 -f pulse -ac 2 -i alsa_output.pci-0000_00_1f.3.analog-stereo.monitor output.mkv
@@ -298,8 +298,6 @@ function stream-sink {
         echo "Already loaded"
         return
     fi
-    # pactl load-module module-virtual-sink sink_name=stream_sink
-    # pacmd 'update-sink-proplist stream_sink device.description="OBS Stream"'
     pw-cli create-node adapter '{
         factory.name=support.null-audio-sink
         node.name=stream_sink

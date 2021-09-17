@@ -14,6 +14,11 @@ export NO_AT_BRIDGE=1
 # WINE!
 export WINEDLLOVERRIDES=winemenubuilder.exe=d
 
+# AMD
+export AMD_VULKAN_ICD=RADV
+export RADV_PERFTEST=nggc
+export MESA_VK_IGNORE_CONFORMANCE_WARNING=1
+
 # i3/sway
 if [ "$XDG_CURRENT_DESKTOP" = "i3" -o "$XDG_CURRENT_DESKTOP" = "sway" ]; then
     # Language
