@@ -44,7 +44,7 @@ volume_notify() {
 
 recording_indicator() {
     muted=$(pamixer --default-source --get-mute)
-    led=$(echo /sys/devices/pci0000:00/*/*/*/*/0003:FEED:980C.0005/input/input26/input26::scrolllock/brightness)
+    led=$(echo /sys/devices/pci0000:00/*/*/*/*/000?:FEED:980C.000?/input/input*/input*::scrolllock/brightness | cut -d' ' -f1)
     if [ "$muted" = true ]; then
         $HOME/.config/sway/setled 0 $led
     else

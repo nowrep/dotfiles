@@ -18,16 +18,25 @@ set $ws9  9
 set $ws10 10
 
 # Output
-output * {
+output "DP-1" {
     bg ~/Pictures/wallpaper.png fill
     subpixel rgb
-    mode 248.227 2560 2608 2640 2720 1440 1443 1448 1521 +hsync -vsync
+    pos 0 0
+    mode --custom 2560x1440@60Hz
+}
+
+output "HDMI-A-3" {
+    bg ~/Pictures/wallpaper.png fill
+    subpixel rgb
+    pos 2560 0
+    mode 3840x2160@60Hz
+    disable
 }
 
 # Idle
 exec swayidle -w \
-    timeout 400 'swaymsg "output * dpms off"' \
-       resume 'swaymsg "output * dpms on"'
+    timeout 400 '~/.config/sway/idle.sh timeout' \
+       resume '~/.config/sway/idle.sh resume'
 
 # Input
 input "65261:38924:TMK._FC980C_Alt_Controller" {
@@ -47,12 +56,16 @@ input "6899:1:Kingsis_Peripherals_ZOWIE_Gaming_mouse" {
     pointer_accel 0.25
 }
 
+seat seat0 xcursor_theme breeze_cursors
+
 font pango:Knack Nerd Font 10.5
 
 focus_follows_mouse no
+mouse_warping none
 
 # Move with mod+mouse
 floating_modifier $mod
+tiling_drag disable
 
 # Kill focused window
 bindsym $mod+q kill
@@ -192,6 +205,12 @@ gaps outer 3
 workspace $ws1 gaps inner 0
 workspace $ws1 gaps outer 0
 hide_edge_borders smart
+
+# TV
+set $ws_tv 11
+workspace $ws_tv output HDMI-A-3
+bindsym --to-code $mod+F12 workspace $ws_tv
+bindsym --to-code $mod+Shift+F12 move container to workspace $ws_tv
 
 # Assignments
 assign [app_id="firefox"] $ws1
