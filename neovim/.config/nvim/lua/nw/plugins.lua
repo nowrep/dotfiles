@@ -156,7 +156,6 @@ return require('packer').startup(function(use)
     }
     use 'tpope/vim-rsi'
     use { 'derekwyatt/vim-fswitch',
-        keys = { '<F4>' },
         config = function()
             vim.api.nvim_set_keymap('n', '<F4>', ':FSHere<CR>', { noremap = true })
         end
