@@ -224,9 +224,6 @@ for_window [app_id="trackma-qt"] floating enable
 for_window [app_id="gwenview"] floating enable
 for_window [app_id="mpv"] floating enable
 
-# Idle
-for_window [class="steam_*"] inhibit_idle focus
-
 # Opacity
 for_window [app_id="foot"] opacity 0.97
 for_window [app_id="weechat-terminal"] opacity 0.97
