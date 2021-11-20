@@ -191,9 +191,9 @@ bindsym XF86AudioPrev exec mpc prev
 bindsym XF86AudioPlay exec mpc toggle
 bindsym XF86AudioStop exec mpc stop
 
-# dunst
-bindsym Ctrl+Space exec dunstctl close
-bindsym Ctrl+Shift+Space exec dunstctl history-pop
+# mako
+bindsym Ctrl+Space exec makoctl dismiss
+bindsym Ctrl+Shift+Space exec makoctl restore
 
 # obs
 bindsym Ctrl+KP_Enter exec ~/.config/sway/obs.sh replay-buffer
