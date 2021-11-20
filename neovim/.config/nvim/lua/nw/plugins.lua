@@ -334,7 +334,8 @@ return require('packer').startup(function(use)
         end
     }
 
-    use { 'glepnir/lspsaga.nvim',
+    use { 'tami5/lspsaga.nvim',
+        branch = 'nvim51',
         config = function()
             require 'lspsaga'.init_lsp_saga {
                 error_sign = '',

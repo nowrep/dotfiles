@@ -104,6 +104,9 @@ vim.opt.autoread = true
 vim.opt.modeline = true
 vim.opt.modelines = 5
 
+-- Enable mouse
+vim.opt.mouse = 'a'
+
 --------------------------------------------------------------
 -- Indentation options
 
