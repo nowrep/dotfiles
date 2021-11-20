@@ -25,7 +25,7 @@ output "DP-1" {
     mode --custom 2560x1440@60Hz
 }
 
-output "HDMI-A-3" {
+output "HDMI-A-1" {
     bg ~/Pictures/wallpaper.png fill
     subpixel rgb
     pos 2560 0
@@ -39,7 +39,7 @@ exec swayidle -w \
        resume '~/.config/sway/idle.sh resume'
 
 # Input
-input "65261:38924:TMK._FC980C_Alt_Controller" {
+input "type:keyboard" {
     xkb_layout us,cz
     xkb_options grp:sclk_toggle,numpad:mac
     repeat_delay 200
@@ -62,6 +62,7 @@ font pango:Knack Nerd Font 10.5
 
 focus_follows_mouse no
 mouse_warping none
+floating_maximum_size -1 x -1
 
 # Move with mod+mouse
 floating_modifier $mod
@@ -171,6 +172,7 @@ bindsym $mod+e exec dolphin
 # Screenshots
 bindsym Print exec ~/.config/sway/screenshot.sh
 bindsym $mod+Print exec ~/.config/sway/screenshot.sh window
+bindsym Ctrl+Print exec ~/.config/sway/screenshot.sh area
 
 # Start your launcher
 bindsym $mod+d exec rofi -show drun
@@ -208,7 +210,7 @@ hide_edge_borders smart
 
 # TV
 set $ws_tv 11
-workspace $ws_tv output HDMI-A-3
+workspace $ws_tv output HDMI-A-1
 bindsym --to-code $mod+F12 workspace $ws_tv
 bindsym --to-code $mod+Shift+F12 move container to workspace $ws_tv
 
@@ -230,8 +232,10 @@ for_window [app_id="weechat-terminal"] opacity 0.97
 
 # Fixes
 for_window [app_id="firefox" title="Open(.*)"] move window to workspace current
+for_window [app_id="firefox" title="Save(.*)"] move window to workspace current
 for_window [app_id="transmission-qt" title="Open Torrent from(.*)"] floating enable, border normal
 for_window [app_id="polkit-kde-authentication-agent-1"] floating enable, border normal
+for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable
 
 set $blue #3daee9
 set $darkblue #34495e
@@ -261,7 +265,7 @@ exec ~/.config/sway/clip.sh listen
 exec ~/.config/sway/pulseaudio-notifier.sh
 exec ~/.config/sway/keyboard-layout-switcher.py
 exec udiskie
-exec wlsunset -l 50.08 -L 14.44
+exec wlsunset-dp1 -l 50.08 -L 14.44
 exec /usr/lib/kdeconnectd
 exec /usr/lib/polkit-kde-authentication-agent-1
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 sink_id=""
-notify_id=100
+notify_id=-1
 icon_low="/usr/share/icons/breeze-dark/status/22/audio-volume-low.svg"
 icon_medium="/usr/share/icons/breeze-dark/status/22/audio-volume-medium.svg"
 icon_high="/usr/share/icons/breeze-dark/status/22/audio-volume-high.svg"
@@ -13,7 +13,7 @@ old_muted=false
 find_sink() {
     sink_id=""
     while [ -z "$sink_id" ]; do
-        sink_id=$(pactl list short sinks  | grep alsa_output.pci-0000_00_1f.3.analog-stereo | cut -f1)
+        sink_id=$(pactl list short sinks  | grep alsa_output.pci-0000_0c_00.4.analog-stereo | cut -f1)
         sleep 1
     done
 }
@@ -22,7 +22,7 @@ volume_notify() {
     muted=$(pamixer --sink $sink_id --get-mute)
     if [ "$muted" = true ]; then
         if [ "$old_muted" != "$muted" ]; then
-            notify-desktop -r $notify_id -i $icon_muted "Muted" > /dev/null
+            notify_id=$(notify-desktop -r $notify_id -i $icon_muted "Muted")
             old_volume=-1
         fi
     else
@@ -35,7 +35,7 @@ volume_notify() {
             else
                 icon=$icon_high
             fi
-            notify-desktop -r $notify_id -i $icon "Volume $volume%" > /dev/null
+            notify_id=$(notify-desktop -r $notify_id -i $icon "Volume $volume%")
         fi
         old_volume=$volume
     fi
@@ -43,9 +43,10 @@ volume_notify() {
 }
 
 recording_indicator() {
+    has_mic=$(pactl list sources short | grep -v .monitor)
     muted=$(pamixer --default-source --get-mute)
-    led=$(echo /sys/devices/pci0000:00/*/*/*/*/000?:FEED:980C.000?/input/input*/input*::scrolllock/brightness | cut -d' ' -f1)
-    if [ "$muted" = true ]; then
+    led=$(echo /sys/devices/pci0000:00/*/*/usb?/*/*/000?:FEED:980C.000?/input/input*/input*::scrolllock/brightness | cut -d' ' -f1)
+    if [ -z "$has_mic" -o "$muted" = true ]; then
         $HOME/.config/sway/setled 0 $led
     else
         $HOME/.config/sway/setled 1 $led
