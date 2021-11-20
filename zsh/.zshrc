@@ -55,7 +55,7 @@ export FZF_DEFAULT_COMMAND="ag -l"
 export FZF_DEFAULT_OPTS="--preview 'cat {}'"
 
 # make
-export MAKEFLAGS="-j12"
+export MAKEFLAGS="-j24"
 
 # gpg
 export GPG_TTY=$(tty)
@@ -287,14 +287,14 @@ function run-scaled {
 
 function record-desktop {
     if [ -n "$WAYLAND_DISPLAY" ]; then
-        wf-recorder -a"alsa_output.pci-0000_00_1f.3.analog-stereo.monitor" -p preset=superfast
+        wf-recorder -a"alsa_output.pci-0000_0c_00.4.analog-stereo.monitor" -p preset=superfast
     else
-        ffmpeg -video_size 2560x1440 -draw_mouse 0 -framerate 30 -f x11grab -i :0.0+0,0 -f pulse -ac 2 -i alsa_output.pci-0000_00_1f.3.analog-stereo.monitor output.mkv
+        ffmpeg -video_size 2560x1440 -draw_mouse 0 -framerate 30 -f x11grab -i :0.0+0,0 -f pulse -ac 2 -i alsa_output.pci-0000_0c_00.4.analog-stereo.monitor output.mkv
     fi
 }
 
 function stream-sink {
-    if pactl list modules | grep stream_sink > /dev/null; then
+    if pactl list sinks | grep stream_sink > /dev/null; then
         echo "Already loaded"
         return
     fi
@@ -306,19 +306,19 @@ function stream-sink {
         object.linger=true
         audio.position=[FL FR]
     }'
-    pw-link 'stream_sink:monitor_FL' 'alsa_output.pci-0000_00_1f.3.analog-stereo:playback_FL'
-    pw-link 'stream_sink:monitor_FR' 'alsa_output.pci-0000_00_1f.3.analog-stereo:playback_FR'
+    pw-link 'stream_sink:monitor_FL' 'alsa_output.pci-0000_0c_00.4.analog-stereo:playback_FL'
+    pw-link 'stream_sink:monitor_FR' 'alsa_output.pci-0000_0c_00.4.analog-stereo:playback_FR'
 }
 
 function tv-enable {
-    swaymsg 'output HDMI-A-3 enable'
+    swaymsg 'output HDMI-A-1 enable'
     swaymsg 'seat seat0 pointer_constraint disable'
     xoutput=$(xrandr -q | grep XWAYLAND | grep -v XWAYLAND0 | cut -d' ' -f1)
     xrandr --output $xoutput --primary
 }
 
 function tv-disable {
-    swaymsg 'output HDMI-A-3 disable'
+    swaymsg 'output HDMI-A-1 disable'
     swaymsg 'seat seat0 pointer_constraint enable'
 }
 
