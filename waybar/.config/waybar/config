@@ -55,7 +55,7 @@
         },
         "sway/window": {
             "tooltip": false,
-            "format": "{}",
+            "format": "<span fallback='false'>{}</span>",
             "max-length": 150
         },
         "custom/openvpn": {

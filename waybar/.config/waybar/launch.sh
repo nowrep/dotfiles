@@ -7,8 +7,8 @@ killall -q waybar
 while pgrep -u $UID -x waybar >/dev/null; do sleep 1; done
 
 mkdir -p /tmp/waybar
-ln -sf /sys/devices/platform/coretemp.0/hwmon/hwmon*/temp1_input /tmp/waybar/cpu_temp
-ln -sf /sys/class/drm/card1/device/hwmon/hwmon*/temp2_input /tmp/waybar/gpu_temp
+ln -sf /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon*/temp2_input /tmp/waybar/cpu_temp
+ln -sf /sys/class/drm/card0/device/hwmon/hwmon*/temp2_input /tmp/waybar/gpu_temp
 
 # Launch main bar
 waybar &
