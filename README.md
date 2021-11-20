@@ -3,6 +3,6 @@
 Managed using `stow`:
 
 ```
-stow i3
-stow alacritty
+stow sway
+stow foot
 ```
