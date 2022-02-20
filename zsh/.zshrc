@@ -84,6 +84,7 @@ alias pingg='ping -c 3 8.8.8.8'
 alias objdump='objdump -M intel'
 alias hukotvpn="(cd ~/Documents/vpn && sudo openvpn client.conf)"
 alias radeontop='radeontop -c -T'
+alias rocm-smi='/opt/rocm/bin/rocm-smi'
 
 # Sudo aliases
 alias sudo="nocorrect sudo "
@@ -236,8 +237,8 @@ function xbox-ps3 {
 
 function shares-start {
     cd ~/Shares/webdav/
-    nohup ./dave > /dev/null &
-    cd -
+    nohup ./dave > /dev/null 2>&1 &
+    cd - > /dev/null
 }
 
 function shares-stop {
@@ -320,6 +321,11 @@ function tv-enable {
 function tv-disable {
     swaymsg 'output HDMI-A-1 disable'
     swaymsg 'seat seat0 pointer_constraint enable'
+}
+
+function obsxcb {
+    stream-sink
+    obs --platform xcb
 }
 
 # Private

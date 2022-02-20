@@ -17,8 +17,6 @@ export WINEDLLOVERRIDES=winemenubuilder.exe=d
 
 # AMD
 export AMD_VULKAN_ICD=RADV
-export radeonsi_enable_sam=true
-export RADV_PERFTEST=sam
 export MESA_VK_IGNORE_CONFORMANCE_WARNING=1
 export MESA_DISK_CACHE_SINGLE_FILE=1
 
