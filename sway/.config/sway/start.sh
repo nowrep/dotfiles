@@ -12,6 +12,7 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 export QT_QPA_PLATFORM=wayland
 export QSG_RENDER_LOOP=windows
 export QT_WAYLAND_FORCE_DPI=115
+export GST_GL_WINDOW=egl-device
 
 # ssh-agent
 export SSH_ASKPASS=/home/david/.ssh/askpass.sh

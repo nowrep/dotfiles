@@ -265,7 +265,7 @@ exec ~/.config/sway/clip.sh listen
 exec ~/.config/sway/pulseaudio-notifier.sh
 exec ~/.config/sway/keyboard-layout-switcher.py
 exec udiskie
-exec wlsunset-dp1 -l 50.08 -L 14.44
+exec wlsunset -o DP-1 -l 50.08 -L 14.44
 exec /usr/lib/kdeconnectd
 exec /usr/lib/polkit-kde-authentication-agent-1
 

@@ -17,6 +17,7 @@ us_window_ids = [
 ]
 
 in_game = False
+active_layout_index = -1
 
 ipc = i3ipc.Connection()
 
@@ -32,22 +33,22 @@ def on_window_focus(ipc, focused):
     if focused_id is None: focused_id = focused.container.window_class
     if focused_id is None: return
 
-    global in_game
+    global in_game, active_layout_index
 
     layout = CZ_LAYOUT
     if focused_id in us_window_ids:
         layout = US_LAYOUT
 
-    if focused_id == "steam_app_FFXIV":
+    if focused_id == "steam_app_FFXIV" or focused_id == "ffxiv_dx11.exe" or focused_id == "gamescope":
         in_game = True
         altmeta_switch(True)
     elif in_game:
         in_game = False
         altmeta_switch(False)
 
-    for input in ipc.get_inputs():
-        if input.identifier == KEYBOARD_ID and input.xkb_active_layout_index != layout:
-            ipc.command("input {0} xkb_switch_layout {1}".format(KEYBOARD_ID, layout))
+    if active_layout_index != layout:
+        active_layout_index = layout
+        ipc.command("input {0} xkb_switch_layout {1}".format(KEYBOARD_ID, layout))
 
     # print(focused_id)
 

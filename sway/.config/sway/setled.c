@@ -1,3 +1,6 @@
+// gcc setled.c -o setled
+// setcap CAP_DAC_OVERRIDE+ep setled
+
 #include <stdio.h>
 #include <string.h>
 

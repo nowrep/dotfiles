@@ -7,7 +7,8 @@ fullname="$dir/$name"
 if [ "$1" = "window" ]; then
     /usr/share/sway/scripts/grimshot save active "$fullname"
 elif [ "$1" = "area" ]; then
-    /usr/share/sway/scripts/grimshot save area "$fullname"
+    out=$(/usr/share/sway/scripts/grimshot save area "$fullname")
+    [ -z "$out" ] && exit
 else
     /usr/share/sway/scripts/grimshot save output "$fullname"
 fi
