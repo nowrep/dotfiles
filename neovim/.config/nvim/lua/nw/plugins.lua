@@ -145,8 +145,8 @@ return require('packer').startup(function(use)
     use 'tpope/vim-eunuch'
     use { 'tpope/vim-commentary',
         config = function()
-            vim.api.nvim_set_keymap('n', '<C-_>', 'gcc', {})
-            vim.api.nvim_set_keymap('v', '<C-_>', 'gc', {})
+            vim.api.nvim_set_keymap('n', '<C-/>', 'gcc', {})
+            vim.api.nvim_set_keymap('v', '<C-/>', 'gc', {})
         end
     }
     use { 'tpope/vim-fugitive',
@@ -192,7 +192,7 @@ return require('packer').startup(function(use)
     }
     use 'junegunn/vim-easy-align'
     use 'junegunn/gv.vim'
-    use 'rstacruz/vim-closer'
+    -- use 'rstacruz/vim-closer'
     use 'wellle/visual-split.vim'
     use { 'szw/vim-maximizer',
         config = function()
@@ -349,52 +349,119 @@ return require('packer').startup(function(use)
         end
     }
 
-    use { 'hrsh7th/nvim-compe',
+    use { 'hrsh7th/cmp-nvim-lsp' }
+    use { 'hrsh7th/cmp-buffer' }
+    use { 'hrsh7th/cmp-path' }
+    use { 'hrsh7th/cmp-cmdline' }
+    use { 'hrsh7th/vim-vsnip' }
+    use { 'onsails/lspkind-nvim' }
+
+    use { 'hrsh7th/nvim-cmp',
         config = function()
-            vim.opt.completeopt = { 'menuone' , 'noselect' }
+            vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
-            require 'compe'.setup {
-                enabled = true,
-                autocomplete = true,
-                source = {
-                    path = true,
-                    buffer = true,
-                    nvim_lsp = true,
-                    nvim_lua = { 'lua' },
-                    vsnip = true
+            local cmp = require 'cmp'
+            local lspkind = require 'lspkind'
+
+            lspkind.init({
+                symbol_map = {
+                    Text = "",
+                    Method = "",
+                    Function = "",
+                    Constructor = "",
+                    Field = "ﰠ",
+                    Variable = "",
+                    Class = "ﴯ",
+                    Interface = "",
+                    Module = "",
+                    Property = "ﰠ",
+                    Unit = "塞",
+                    Value = "",
+                    Enum = "",
+                    Keyword = "",
+                    Snippet = "",
+                    Color = "",
+                    File = "",
+                    Reference = "",
+                    Folder = "",
+                    EnumMember = "",
+                    Constant = "",
+                    Struct = "פּ",
+                    Event = "",
+                    Operator = "",
+                    TypeParameter = ""
                 }
-            }
+            })
 
-            local t = function(str)
-                return vim.api.nvim_replace_termcodes(str, true, true, true)
+            local feedkey = function(key, mode)
+                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
             end
 
-            _G.tab_complete = function()
-                if vim.fn.pumvisible() == 1 then
-                    return vim.fn['compe#confirm']({ keys = '<CR>', select = true })
-                elseif vim.fn['vsnip#available'](1) == 1 then
-                    return t "<Plug>(vsnip-expand-or-jump)"
-                else
-                    return t "<Tab>"
-                end
-            end
+            cmp.setup({
+                formatting = {
+                    format = lspkind.cmp_format {
+                        with_text = true,
+                        maxwidth = 50,
+                        menu = {
+                            buffer = "BUF",
+                            nvim_lsp = "LSP",
+                            path = "PATH",
+                            vsnip = "SNIP"
+                        }
+                    }
+                },
+                snippet = {
+                    expand = function(args)
+                        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+                    end,
+                },
+                mapping = {
+                    ["<C-p>"] = cmp.mapping.select_prev_item(),
+                    ["<C-n>"] = cmp.mapping.select_next_item(),
+                    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+                    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+                    ["<C-Space>"] = cmp.mapping.complete(),
+                    ["<C-e>"] = cmp.mapping.close(),
+                    ["<CR>"] = cmp.mapping.confirm {
+                        behavior = cmp.ConfirmBehavior.Replace,
+                        select = false
+                    },
+                    ["<Tab>"] = cmp.mapping(function(fallback)
+                        if vim.fn["vsnip#available"](1) == 1 then
+                            feedkey("<Plug>(vsnip-expand-or-jump)", "")
+                        elseif cmp.visible() then
+                            cmp.confirm({ select = true })
+                        else
+                            fallback()
+                        end
+                    end,
+                    {"i", "s"}),
+                    ["<S-Tab>"] = cmp.mapping(function()
+                        if vim.fn["vsnip#jumpable"](-1) == 1 then
+                            feedkey("<Plug>(vsnip-jump-prev)", "")
+                        else
+                            fallback()
+                        end
+                    end,
+                    {"i", "s"})
+                },
+                sources = {
+                    { name = 'nvim_lsp' },
+                    { name = 'buffer', keyword_length = 5 },
+                    { name = 'vsnip' },
+                    { name = 'path' }
+                }
+            })
 
-            _G.s_tab_complete = function()
-                if vim.fn['vsnip#jumpable'](-1) == 1 then
-                    return t "<Plug>(vsnip-jump-prev)"
-                else
-                    return t "<S-Tab>"
-                end
-            end
+            -- Use buffer source for `/`.
+            -- cmp.setup.cmdline("/", {sources = {{name = "buffer"}}})
 
-            vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", { expr = true })
-            vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", { expr = true })
-            vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
-            vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
+            -- Use cmdline & path source for ':'.
+            -- cmp.setup.cmdline(":", {
+                -- sources = cmp.config.sources({{name = "path"}}, {{name = "cmdline"}})
+            -- })
         end
     }
-
-    use { 'hrsh7th/vim-vsnip' }
 
     -- use { 'nvim-treesitter/nvim-treesitter',
     --     run = ':TSUpdate',
