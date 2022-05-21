@@ -124,14 +124,10 @@ function backuphome {
         .mozilla \
         .oh-my-zsh \
         .ssh \
-        .kde \
         .electrum \
         .filezilla \
         .local \
-        .transifexrc \
-        .zprofile \
-        .zsh_history \
-        .zshrc && echo "Backup successfull!"
+        && echo "Backup successfull!"
 
     cd -
 }
@@ -187,54 +183,6 @@ function encode_8bit {
     rm $tmpfile
 }
 
-function tv-play {
-    # Program: 16644-16648
-    case "$1" in
-        ct1)
-            PROGRAM=257
-            FREQUENCY=730
-            ;;
-        ct2)
-            PROGRAM=258
-            FREQUENCY=730
-            ;;
-        ct24)
-            PROGRAM=259
-            FREQUENCY=730
-            ;;
-        ctsport)
-            PROGRAM=260
-            FREQUENCY=730
-            ;;
-        nova)
-            PROGRAM=513
-            FREQUENCY=634
-            ;;
-        novacinema)
-            PROGRAM=514
-            FREQUENCY=634
-            ;;
-        prima)
-            PROGRAM=773
-            FREQUENCY=634
-            ;;
-        *)
-            PROGRAM=260
-            FREQUENCY=730
-            ;;
-    esac
-    cvlc dvb-t://frequency=${FREQUENCY}000000 --dvb-bandwidth=8 --program=$PROGRAM
-}
-
-function xbox-ps3 {
-    sudo xboxdrv \
-     --evdev /dev/input/event21 \
-     --evdev-absmap ABS_X=x1,ABS_Y=y1,ABS_Z=x2,ABS_RZ=y2,ABS_#48=lt,ABS_#49=rt \
-     --evdev-keymap BTN_THUMB=tl,BTN_THUMB2=tr,BTN_BASE5=lb,BTN_BASE6=rb,KEY_#302=a,KEY_#301=b,BTN_DEAD=x,KEY_#300=y,BTN_TRIGGER=back,KEY_#720=guide,BTN_TOP=start,BTN_TOP2=du,BTN_PINKIE=dr,BTN_BASE=dd,BTN_BASE2=dl \
-     --axismap -y1=y1,-y2=y2 \
-     --silent
-}
-
 function shares-start {
     cd ~/Shares/webdav/
     nohup ./dave > /dev/null 2>&1 &
@@ -270,22 +218,6 @@ function android-env {
     export PATH=/media/Data/Android/Qt-5.9.2/5.9.2/android_armv7/bin:$PATH
 }
 
-function enable-swap {
-    local swapfile=/media/DataSSD/swapfile
-    sudo fallocate -l 16G $swapfile
-    sudo chmod 600 $swapfile
-    sudo mkswap $swapfile
-    sudo swapon $swapfile
-}
-
-function run-scaled {
-    Xephyr -once -screen 1024x768 :1 &; sleep 2
-    x11vnc -localhost -display :1 -scale 2 -repeat -nocursor &
-    krdc vnc://david@localhost &
-    DISPLAY=:1 "$@"
-    pkill Xephyr
-}
-
 function record-desktop {
     if [ -n "$WAYLAND_DISPLAY" ]; then
         wf-recorder -a"alsa_output.pci-0000_0c_00.4.analog-stereo.monitor" -p preset=superfast
@@ -297,16 +229,16 @@ function record-desktop {
 function stream-sink {
     if pactl list sinks | grep stream_sink > /dev/null; then
         echo "Already loaded"
-        return
+    else
+        pw-cli create-node adapter '{
+            factory.name=support.null-audio-sink
+            node.name=stream_sink
+            node.description="OBS Stream"
+            media.class=Audio/Sink
+            object.linger=true
+            audio.position=[FL FR]
+        }'
     fi
-    pw-cli create-node adapter '{
-        factory.name=support.null-audio-sink
-        node.name=stream_sink
-        node.description="OBS Stream"
-        media.class=Audio/Sink
-        object.linger=true
-        audio.position=[FL FR]
-    }'
     pw-link 'stream_sink:monitor_FL' 'alsa_output.pci-0000_0c_00.4.analog-stereo:playback_FL'
     pw-link 'stream_sink:monitor_FR' 'alsa_output.pci-0000_0c_00.4.analog-stereo:playback_FR'
 }
@@ -326,6 +258,15 @@ function tv-disable {
 function obsxcb {
     stream-sink
     obs --platform xcb
+}
+
+function extract_icons {
+    name="${1%.*}"
+    wrestool -x -t 14 "$1" > ${name}.ico
+    index=$(icotool -l ${name}.ico | wc -l)
+    icotool -i ${index} -x ${name}.ico
+    rm ${name}.ico
+    mv ${name}_${index}_*.png ${name}_icon.png
 }
 
 # Private

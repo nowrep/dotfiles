@@ -17,7 +17,6 @@ export WINEDLLOVERRIDES=winemenubuilder.exe=d
 
 # AMD
 export AMD_VULKAN_ICD=RADV
-export MESA_VK_IGNORE_CONFORMANCE_WARNING=1
 export MESA_DISK_CACHE_SINGLE_FILE=1
 
 # Language
@@ -28,3 +27,7 @@ export LC_MONETARY=cs_CZ.UTF-8
 export LC_NUMERIC=cs_CZ.UTF-8
 export LC_TIME=cs_CZ.UTF-8
 export TZ=/etc/localtime
+
+# GDB
+DEBUGINFOD_URLS="https://debuginfod.archlinux.org/"
+DEBUGINFOD_CACHE_PATH=/tmp/debuginfod
