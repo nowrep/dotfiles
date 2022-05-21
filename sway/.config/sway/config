@@ -215,7 +215,6 @@ bindsym --to-code $mod+F12 workspace $ws_tv
 bindsym --to-code $mod+Shift+F12 move container to workspace $ws_tv
 
 # Assignments
-assign [app_id="firefox"] $ws1
 assign [app_id="thunderbird"] $ws10
 assign [app_id="weechat-terminal"] $ws2
 
@@ -231,8 +230,6 @@ for_window [app_id="foot"] opacity 0.97
 for_window [app_id="weechat-terminal"] opacity 0.97
 
 # Fixes
-for_window [app_id="firefox" title="Open(.*)"] move window to workspace current
-for_window [app_id="firefox" title="Save(.*)"] move window to workspace current
 for_window [app_id="transmission-qt" title="Open Torrent from(.*)"] floating enable, border normal
 for_window [app_id="polkit-kde-authentication-agent-1"] floating enable, border normal
 for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable
@@ -269,4 +266,7 @@ exec wlsunset -o DP-1 -l 50.08 -L 14.44
 exec /usr/lib/kdeconnectd
 exec /usr/lib/polkit-kde-authentication-agent-1
 
-workspace $ws1
+for_window [app_id="term-scratchpad"] move scratchpad
+exec $term --app-id term-scratchpad
+
+exec sleep 0.5 && swaymsg workspace $ws1

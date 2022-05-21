@@ -1,7 +1,7 @@
 #!/bin/bash
 
-muted=$(pamixer --default-source --get-mute)
-if [ "$muted" = true ]; then
+muted=$(pactl get-source-mute @DEFAULT_SOURCE@ | cut -d' ' -f2)
+if [ "$muted" = "yes" ]; then
     to_mute=0
 else
     to_mute=1

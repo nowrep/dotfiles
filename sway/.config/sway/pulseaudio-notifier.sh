@@ -19,14 +19,18 @@ find_sink() {
 }
 
 volume_notify() {
-    muted=$(pamixer --sink $sink_id --get-mute)
-    if [ "$muted" = true ]; then
+    muted=$(pactl get-sink-mute $sink_id)
+    [ $? -ne 0 ] && return
+    volume=$(pactl get-sink-volume $sink_id)
+    [ $? -ne 0 ] && return
+    muted=$(echo $muted | cut -d' ' -f2)
+    volume=$(echo $volume | cut -d/ -f 2 | head -1 | sed 's/[^0-9]*//g')
+    if [ "$muted" = "yes" ]; then
         if [ "$old_muted" != "$muted" ]; then
             notify_id=$(notify-desktop -r $notify_id -i $icon_muted "Muted")
             old_volume=-1
         fi
     else
-        volume=$(pamixer --sink $sink_id --get-volume)
         if [ "$old_volume" != "$volume" ]; then
             if [ "$volume" -lt 25 ]; then
                 icon=$icon_low
@@ -44,9 +48,9 @@ volume_notify() {
 
 recording_indicator() {
     has_mic=$(pactl list sources short | grep -v .monitor)
-    muted=$(pamixer --default-source --get-mute)
+    muted=$(pactl get-source-mute @DEFAULT_SOURCE@ | cut -d' ' -f2)
     led=$(echo /sys/devices/pci0000:00/*/*/usb?/*/*/000?:FEED:980C.000?/input/input*/input*::scrolllock/brightness | cut -d' ' -f1)
-    if [ -z "$has_mic" -o "$muted" = true ]; then
+    if [ -z "$has_mic" -o "$muted" = "yes" ]; then
         $HOME/.config/sway/setled 0 $led
     else
         $HOME/.config/sway/setled 1 $led
