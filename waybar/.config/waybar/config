@@ -5,6 +5,7 @@
         "output": "DP-1",
         "position": "top",
         "margin": "0 2",
+        "height": 32,
         "modules-left": [
             "sway/workspaces",
             "sway/mode",
@@ -55,8 +56,8 @@
         },
         "sway/window": {
             "tooltip": false,
-            "format": "<span fallback='false'>{}</span>",
-            "max-length": 150
+            "max-length": 150,
+            "icon": false
         },
         "custom/openvpn": {
             "tooltip": false,
