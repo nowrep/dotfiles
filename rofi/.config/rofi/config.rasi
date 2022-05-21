@@ -1,6 +1,7 @@
 configuration {
     terminal:    "alacritty";
-    theme:       "style.rasi";
     show-icons:  true;
     modi:        "run,drun";
 }
+
+@theme "style.rasi"

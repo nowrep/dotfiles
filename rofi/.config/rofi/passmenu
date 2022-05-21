@@ -24,6 +24,6 @@ else
     if [ "$XDG_SESSION_TYPE" = "x11" ]; then
         xdotool type --clearmodifiers "$p"
     elif [ "$XDG_SESSION_TYPE" = "wayland" ]; then
-        sleep 0.1 && wlrctl keyboard type "$p"
+        sleep 0.1 && wtype "$p"
     fi
 fi
