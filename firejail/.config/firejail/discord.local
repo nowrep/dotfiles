@@ -1,2 +1,3 @@
-blacklist /media
+disable-mnt
+ignore private-tmp
 nowhitelist ${DOWNLOADS}
