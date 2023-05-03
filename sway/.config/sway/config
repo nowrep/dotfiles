@@ -17,18 +17,20 @@ set $ws8  8
 set $ws9  9
 set $ws10 10
 
+workspace $ws1
+
 # Output
 output "DP-1" {
-    bg ~/Pictures/wallpaper.png fill
+    bg ~/Pictures/wallpaper-wide.jpg fill
     subpixel rgb
     pos 0 0
-    mode --custom 2560x1440@60Hz
+    modeline 658.75 3440 3488 3520 3600 1440 1443 1453 1525 +HSync -VSync
 }
 
 output "HDMI-A-1" {
     bg ~/Pictures/wallpaper.png fill
     subpixel rgb
-    pos 2560 0
+    pos 3440 0
     mode 3840x2160@60Hz
     disable
 }
@@ -56,7 +58,11 @@ input "6899:1:Kingsis_Peripherals_ZOWIE_Gaming_mouse" {
     pointer_accel 0.25
 }
 
-seat seat0 xcursor_theme breeze_cursors
+input "1356:3302:Sony_Interactive_Entertainment_Wireless_Controller_Touchpad" {
+    events disabled
+}
+
+seat seat0 xcursor_theme Adwaita
 
 font pango:Knack Nerd Font 10.5
 
@@ -224,15 +230,21 @@ for_window [app_id="ark"] floating enable
 for_window [app_id="trackma-qt"] floating enable
 for_window [app_id="gwenview"] floating enable
 for_window [app_id="mpv"] floating enable
+for_window [app_id="kcalc"] floating enable
 
 # Opacity
 for_window [app_id="foot"] opacity 0.97
+for_window [app_id="foot-scratchpad"] opacity 0.97
 for_window [app_id="weechat-terminal"] opacity 0.97
 
 # Fixes
 for_window [app_id="transmission-qt" title="Open Torrent from(.*)"] floating enable, border normal
 for_window [app_id="polkit-kde-authentication-agent-1"] floating enable, border normal
 for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable
+for_window [title="Picture-in-Picture"] floating enable
+for_window [title="Wine System Tray"] kill
+for_window [app_id="chrome-.*"] shortcuts_inhibitor disable
+
 
 set $blue #3daee9
 set $darkblue #34495e
@@ -259,14 +271,14 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
 exec ~/.config/sway/post-start.sh
 exec_always ~/.config/waybar/launch.sh
 exec ~/.config/sway/clip.sh listen
-exec ~/.config/sway/pulseaudio-notifier.sh
 exec ~/.config/sway/keyboard-layout-switcher.py
 exec udiskie
 exec wlsunset -o DP-1 -l 50.08 -L 14.44
+exec wljoywake
 exec /usr/lib/kdeconnectd
 exec /usr/lib/polkit-kde-authentication-agent-1
 
-for_window [app_id="term-scratchpad"] move scratchpad
-exec $term --app-id term-scratchpad
+for_window [app_id="foot-scratchpad"] move scratchpad
+exec $term --app-id foot-scratchpad
 
-exec sleep 0.5 && swaymsg workspace $ws1
+exec sleep 2 && swaymsg workspace $ws1

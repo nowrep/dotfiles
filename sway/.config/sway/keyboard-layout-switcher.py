@@ -12,7 +12,7 @@ KEYBOARD_ID = "65261:38924:TMK._FC980C_Alt_Controller"
 us_window_ids = [
     "org.kde.krdc",
     "foot",
-    "term-scratchpad",
+    "foot-scratchpad",
     "assistant", # Qt Assistant
 ]
 

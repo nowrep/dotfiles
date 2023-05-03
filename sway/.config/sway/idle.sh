@@ -2,7 +2,7 @@
 
 case "$1" in
     timeout)
-        swaymsg 'output DP-1 dpms off'
+        chayang -d 30 && swaymsg 'output DP-1 power off'
         ;;
 
     resume)
@@ -13,12 +13,12 @@ case "$1" in
             ~/.config/sway/idle.sh resume-wait &
             exit
         fi
-        swaymsg 'output DP-1 dpms on'
+        swaymsg 'output DP-1 power on'
         ;;
 
     resume-wait)
         while [ "$(swaymsg -t subscribe '["workspace"]' | jq -r '.current.output')" != "DP-1" ]; do true; done
-        swaymsg 'output DP-1 dpms on'
+        swaymsg 'output DP-1 power on'
         ;;
 
     *)
