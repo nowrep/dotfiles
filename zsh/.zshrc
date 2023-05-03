@@ -19,6 +19,9 @@ osc7_cwd() {
 autoload -Uz add-zsh-hook
 add-zsh-hook -Uz chpwd osc7_cwd
 
+# tab width
+tabs -4
+
 # foot workaround
 bindkey "\e[27;2;13~" accept-line # shift+return
 bindkey "\e[27;5;13~" accept-line # ctrl+return
@@ -46,7 +49,7 @@ export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear:ll"
 export EDITOR=/usr/bin/nvim
 
 # Change default shell pager
-export PAGER="less -i"
+export PAGER="less --tabs=4 -i"
 export LESSHISTFILE=/dev/null
 alias less=$PAGER
 
@@ -61,8 +64,7 @@ export MAKEFLAGS="-j24"
 export GPG_TTY=$(tty)
 
 # Aliases
-alias ls="exa"
-alias ll="ls -l"
+alias ll="ls -lhG"
 alias monitor_off="xset dpms force off"
 alias grep="grep --color=auto"
 alias cdq="cd ~/Programming/Qt-C++/QupZilla"
@@ -75,7 +77,7 @@ alias diff="colordiff"
 alias valgrind-full="valgrind --leak-check=full --show-reachable=yes --track-origins=yes"
 alias kf5-env="source /media/Data/KDE/env.sh"
 alias callgrind="valgrind --tool=callgrind"
-alias cmake="cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -GNinja"
+alias cmake="cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_COLOR_DIAGNOSTICS=ON -GNinja"
 alias kf5-cmake="cmake .. -DCMAKE_CXX_FLAGS:STRING=-pipe -DCMAKE_INSTALL_PREFIX=/media/Data/KDE"
 alias vi='nvim'
 alias vim='nvim'
@@ -113,8 +115,11 @@ function backuphome {
         --exclude '*.o' \
         --exclude '.git/*' \
         --exclude 'build/*' \
+        --exclude 'target/*' \
         --exclude 'flatpak' \
         --exclude 'Steam' \
+        --exclude 'pkgbuilds' \
+        --exclude 'rpcs3' \
         -f /media/Data/Backup/backup_`date +%Y%m%d`.tar.xz \
         Documents \
         Pictures \
@@ -246,13 +251,14 @@ function stream-sink {
 function tv-enable {
     swaymsg 'output HDMI-A-1 enable'
     swaymsg 'seat seat0 pointer_constraint disable'
-    xoutput=$(xrandr -q | grep XWAYLAND | grep -v XWAYLAND0 | cut -d' ' -f1)
-    xrandr --output $xoutput --primary
+    xrandr --output HDMI-A-1 --primary
+    pkill -SIGUSR1 wljoywake
 }
 
 function tv-disable {
     swaymsg 'output HDMI-A-1 disable'
     swaymsg 'seat seat0 pointer_constraint enable'
+    pkill -SIGUSR2 wljoywake
 }
 
 function obsxcb {
