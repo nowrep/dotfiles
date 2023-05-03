@@ -76,10 +76,6 @@
 #element alternate normal {
 }
 
-#element alternate active {
-  text-color: @focus-col;
-}
-
 #element alternate urgent {
   background-color: OrangeRed;
 }
