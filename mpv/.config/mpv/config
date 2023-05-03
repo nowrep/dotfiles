@@ -2,14 +2,12 @@
 [default]
 
 # Video
-hwdec = auto
 gpu-api = vulkan
 autofit = 75%x75%
 
 profile = gpu-hq
 scale = ewa_lanczossharp
 cscale = ewa_lanczossoft
-gamma-factor = 1.1
 
 # Audio
 volume = 100
@@ -33,7 +31,13 @@ msg-module = yes
 msg-color = yes
 
 # youtube-dl
-ytdl-format=bestvideo+bestaudio/best
+ytdl-format=bestvideo[height<=1440]+bestaudio/best
+
+[protocol.file]
+# Backwards frame stepping
+hr-seek = yes
+demuxer-cache-wait = yes
+demuxer-seekable-cache = yes
 
 [protocol.https]
 cache=yes
