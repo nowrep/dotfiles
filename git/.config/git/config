@@ -1,3 +1,6 @@
+[include]
+path = config.local
+
 [user]
 name = David Rosca
 email = nowrep@gmail.com
