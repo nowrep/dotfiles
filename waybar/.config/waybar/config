@@ -16,7 +16,7 @@
         "modules-right": [
             "custom/openvpn",
             "sway/language",
-            "pulseaudio",
+            "custom/pulseaudio",
             "memory",
             "cpu",
             "temperature#cpu",
@@ -47,7 +47,7 @@
             "tooltip": false,
             "exec": "$HOME/.config/waybar/mpd-tail.sh",
             "restart-interval": 5,
-            "max-length": 45
+            "max-length": 60
         },
         "custom/openweathermap-simple": {
             "tooltip": false,
@@ -69,13 +69,14 @@
             "tooltip": false,
             "format": "⠀ {}"
         },
-        "pulseaudio": {
+        "custom/pulseaudio": {
             "tooltip": false,
-            "scroll-step": 5,
-            "format": "{icon} {volume}%",
-            "format-icons": {
-                "default": ["", "", ""]
-            }
+            "return-type": "json",
+            "exec": "$HOME/.config/waybar/pulseaudio-notifier.sh",
+            "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+            "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
+            "format": "{icon} {percentage}%",
+            "format-icons": ["", "", ""]
         },
         "memory": {
             "tooltip": false,
@@ -91,7 +92,7 @@
             "tooltip": false,
             "interval": 2,
             "hwmon-path": "/tmp/waybar/cpu_temp",
-            "critical-threshold": 80,
+            "critical-threshold": 85,
             "format": " {temperatureC}°C",
             "format-critical": " {temperatureC}°C"
         },
@@ -99,7 +100,7 @@
             "tooltip": false,
             "interval": 2,
             "hwmon-path": "/tmp/waybar/gpu_temp",
-            "critical-threshold": 90,
+            "critical-threshold": 95,
             "format": " {temperatureC}°C",
             "format-critical": " {temperatureC}°C"
         },

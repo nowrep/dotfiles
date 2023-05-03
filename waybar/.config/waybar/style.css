@@ -6,7 +6,6 @@
 
 window#waybar
 {
-    color: #dfdfdf;
     background-color: rgba(33, 33, 30, 0.5);
     border: 2px solid rgba(0, 0, 0, 0);
     border-radius: 5px;
@@ -51,6 +50,7 @@ window#waybar
 
 #custom-mpd-tail
 {
+    color: #dfdfdf;
     padding-left: 14px;
     font-family: "Noto Sans", "Knack Nerd Font";
     font-size: 11pt;
@@ -58,6 +58,7 @@ window#waybar
 
 #custom-openweathermap-simple
 {
+    color: #dfdfdf;
     padding-left: 20px;
     font-family: "Noto Sans", "Weather Icons";
     font-size: 11pt;
@@ -65,44 +66,51 @@ window#waybar
 
 #window
 {
+    color: #dfdfdf;
     font-family: "Noto Sans";
     font-size: 11pt;
 }
 
 #custom-openvpn
 {
+    color: #dfdfdf;
     padding-right: 12px;
 }
 
 #language
 {
+    color: #dfdfdf;
     padding-right: 18px;
 }
 
-#pulseaudio
+#custom-pulseaudio
 {
+    color: #dfdfdf;
     padding-right: 18px;
     min-width: 48px;
 }
 
-#pulseaudio.muted
+#custom-pulseaudio.muted
 {
     color: #555;
 }
 
 #memory
 {
+    color: #dfdfdf;
     padding-right: 18px;
 }
 
 #cpu
 {
+    color: #dfdfdf;
     padding-right: 18px;
     min-width: 48px;
 }
 
 #temperature.cpu
 {
+    color: #dfdfdf;
     padding-right: 18px;
 }
 
@@ -113,6 +121,7 @@ window#waybar
 
 #temperature.gpu
 {
+    color: #dfdfdf;
     padding-right: 18px;
 }
 
@@ -123,7 +132,15 @@ window#waybar
 
 #clock
 {
+    color: #dfdfdf;
     padding-right: 10px;
+}
+
+#clock:hover
+{
+    background: none;
+    box-shadow: none;
+    text-shadow: none;
 }
 
 #tray

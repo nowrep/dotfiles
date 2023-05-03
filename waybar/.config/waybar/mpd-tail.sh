@@ -8,10 +8,13 @@ _mpc() {
 
 playing_print() {
     s=`_mpc status`
+    t=$(echo "$s" | head -1)
+    t=${t#"RADIO BEAT: "}
+    t=${t#"CLASSIC ROCK - "}
     if echo "$s" | grep playing > /dev/null; then
-        echo "  $s" | head -1
+        echo "  $t"
     elif echo "$s" | grep paused >> /dev/null; then
-        echo "  $s" | head -1
+        echo "  $t"
     else
         echo ""
     fi
