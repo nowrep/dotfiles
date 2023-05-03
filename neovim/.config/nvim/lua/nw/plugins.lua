@@ -66,7 +66,7 @@ return require('packer').startup(function(use)
 
     use { 'ctrlpvim/ctrlp.vim',
         config = function()
-            vim.g.ctrlp_custom_ignore = [[\v[\/](node_modules|target|dist|build)|(\.(swp|tox|ico|git|hg|svn))$]]
+            vim.g.ctrlp_custom_ignore = [[\\v[\/](node_modules|target|dist|build)|(\.(swp|tox|ico|git|hg|svn))$]]
             vim.g.ctrlp_user_command = [[find %s -type f | grep -Ev ']] .. vim.g.ctrlp_custom_ignore .. [[']]
             vim.g.ctrlp_use_caching = 0
             vim.g.ctrlp_map = '<Leader><S-e>'
@@ -275,7 +275,7 @@ return require('packer').startup(function(use)
         cmd = {'NERDTreeToggle'},
         keys = { '<Leader>t' },
         config = function()
-            vim.g.NERDTreeWinSize = 20
+            vim.g.NERDTreeWinSize = 30
             vim.api.nvim_set_keymap('n', '<Leader>t', ':NERDTreeToggle<CR>', { noremap = true })
         end
     }
