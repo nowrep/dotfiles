@@ -71,6 +71,12 @@ window#waybar
     font-size: 11pt;
 }
 
+#custom-dualsense
+{
+    color: #dfdfdf;
+    padding-right: 12px;
+}
+
 #custom-openvpn
 {
     color: #dfdfdf;

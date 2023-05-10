@@ -14,6 +14,7 @@
         ],
         "modules-center": [ "sway/window" ],
         "modules-right": [
+            "custom/dualsense",
             "custom/openvpn",
             "sway/language",
             "custom/pulseaudio",
@@ -58,6 +59,12 @@
             "tooltip": false,
             "max-length": 150,
             "icon": false
+        },
+        "custom/dualsense": {
+            "tooltip": false,
+            "return-type": "json",
+            "exec": "$HOME/.config/waybar/dualsense-notifier.sh",
+            "on-click": "dualsensectl power-off",
         },
         "custom/openvpn": {
             "tooltip": false,
