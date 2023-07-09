@@ -87,6 +87,7 @@ alias objdump='objdump -M intel'
 alias hukotvpn="(cd ~/Documents/vpn && sudo openvpn client.conf)"
 alias radeontop='radeontop -c -T'
 alias rocm-smi='/opt/rocm/bin/rocm-smi'
+alias cal='cal -m'
 
 # Sudo aliases
 alias sudo="nocorrect sudo "
@@ -100,7 +101,6 @@ alias asearch='pacman -Ss'
 alias aasearch='yay -as'
 alias aup='yay -Syu'
 alias ain='sudo pacman -S'
-alias aain='yay -y'
 alias ains='sudo pacman -U'
 alias are='sudo pacman -Rsn'
 

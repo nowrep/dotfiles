@@ -1,7 +1,7 @@
 # ~/.zprofile: executed by the command interpreter for login shells.
 
 # PATH
-export PATH=$PATH:~/Programming/bin:~/.gem/ruby/2.6.0/bin
+export PATH=$PATH:~/Programming/bin:~/.local/bin
 
 # Qt
 c=`echo -e "\033"`
@@ -18,16 +18,22 @@ export WINEDLLOVERRIDES=winemenubuilder.exe=d
 # AMD
 export AMD_VULKAN_ICD=RADV
 export MESA_DISK_CACHE_SINGLE_FILE=1
+export RADV_PERFTEST=video_decode
+export VKD3D_CONFIG=dxr,dxr11
+# export AMD_DEBUG=useaco
 
 # Language
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US
 export LC_MEASUREMENT=cs_CZ.UTF-8
 export LC_MONETARY=cs_CZ.UTF-8
-export LC_NUMERIC=cs_CZ.UTF-8
+export LC_NUMERIC=C
 export LC_TIME=cs_CZ.UTF-8
-export TZ=/etc/localtime
+export TZ=:/etc/localtime
 
 # GDB
-DEBUGINFOD_URLS="https://debuginfod.archlinux.org/"
-DEBUGINFOD_CACHE_PATH=/tmp/debuginfod
+export DEBUGINFOD_URLS="https://debuginfod.archlinux.org/"
+export DEBUGINFOD_CACHE_PATH=/tmp/debuginfod
+
+# CC
+export LDFLAGS="-fuse-ld=mold"
