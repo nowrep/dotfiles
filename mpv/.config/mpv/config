@@ -5,9 +5,10 @@
 gpu-api = vulkan
 autofit = 75%x75%
 
+vo = gpu-next
 profile = gpu-hq
-scale = ewa_lanczossharp
-cscale = ewa_lanczossoft
+scale = catmull_rom
+cscale = catmull_rom
 
 # Audio
 volume = 100
@@ -46,3 +47,8 @@ user-agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Geck
 [protocol.http]
 cache=yes
 user-agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+# Profiles
+[hw-decode]
+profile-desc=cond:get('width', math.huge) > 4000 and get('playback_time') ~= nil
+hwdec = auto
