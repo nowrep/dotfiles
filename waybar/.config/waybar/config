@@ -42,7 +42,8 @@
             },
             "all-outputs": true,
             "disable-scroll-wraparound": true,
-            "enable-bar-scroll": true
+            "enable-bar-scroll": true,
+            "warp-on-scroll": true
         },
         "custom/mpd-tail": {
             "tooltip": false,
