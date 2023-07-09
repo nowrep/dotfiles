@@ -2,7 +2,11 @@
 
 case "$1" in
     timeout)
-        chayang -d 30 && swaymsg 'output DP-1 power off'
+        if [ "$(swaymsg -t get_workspaces | jq -r '.[] | select(.focused==true).output')" == "DP-1" ]; then
+            chayang -d 30 && swaymsg 'output DP-1 power off'
+        else
+            swaymsg 'output DP-1 power off'
+        fi
         ;;
 
     resume)
