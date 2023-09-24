@@ -21,9 +21,13 @@ st = status
 hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 up = pull --rebase --autostash
 edit = !sh -c 'git rebase --interactive "$(git log --pretty=format:%h | head -n$0 | tail -1)^"'
+fixes = show -s --pretty='format:Fixes: %h (\"%s\")'
 
 [commit]
 gpgsign = true
+
+[pull]
+rebase = true
 
 [push]
 default = current
