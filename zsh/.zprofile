@@ -5,7 +5,7 @@ export PATH=$PATH:~/Programming/bin:~/.local/bin
 
 # Qt
 c=`echo -e "\033"`
-export QT_MESSAGE_PATTERN="%{appname}(%{pid})/(%{category}) ${c}[31m%{if-debug}${c}[34m%{endif}%{if-info}${c}[36m%{endif}%{function}${c}[0m: %{message}"
+export QT_MESSAGE_PATTERN="[%{category}] ${c}[31m%{if-debug}${c}[34m%{endif}%{if-info}${c}[36m%{endif}%{function}${c}[0m: %{message}"
 unset c
 export QML_DISK_CACHE_PATH=~/.cache/qmlcache
 
