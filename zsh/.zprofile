@@ -15,6 +15,9 @@ export NO_AT_BRIDGE=1
 # WINE!
 export WINEDLLOVERRIDES=winemenubuilder.exe=d
 
+# Python
+export PYTHONPYCACHEPREFIX=/tmp/cpython
+
 # AMD
 export AMD_VULKAN_ICD=RADV
 export MESA_DISK_CACHE_SINGLE_FILE=1
@@ -27,7 +30,7 @@ export LANG=en_US.UTF-8
 export LANGUAGE=en_US
 export LC_MEASUREMENT=cs_CZ.UTF-8
 export LC_MONETARY=cs_CZ.UTF-8
-export LC_NUMERIC=C
+export LC_NUMERIC=C.UTF-8
 export LC_TIME=cs_CZ.UTF-8
 export TZ=:/etc/localtime
 
