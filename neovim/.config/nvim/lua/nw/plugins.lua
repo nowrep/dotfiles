@@ -296,6 +296,7 @@ return require('packer').startup(function(use)
             end
 
             local lspconfig = require 'lspconfig'
+            -- C/C++
             lspconfig.ccls.setup {
                 on_attach = on_attach,
                 init_options = {
@@ -305,6 +306,7 @@ return require('packer').startup(function(use)
                 },
                 capabilities = capabilities
             }
+            -- Lua
             local runtime_path = vim.split(package.path, ';')
             table.insert(runtime_path, "lua/?.lua")
             table.insert(runtime_path, "lua/?/init.lua")
@@ -330,6 +332,19 @@ return require('packer').startup(function(use)
                     }
                 },
                 capabilities = capabilities
+            }
+            -- Python
+            lspconfig.pylsp.setup{
+                settings = {
+                    pylsp = {
+                        plugins = {
+                            pycodestyle = {
+                                ignore = {'W391', 'E501'},
+                                maxLineLength = 100
+                            }
+                        }
+                    }
+                }
             }
         end
     }
