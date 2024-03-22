@@ -24,7 +24,8 @@ output "DP-1" {
     bg ~/Pictures/wallpaper-wide.jpg fill
     subpixel rgb
     pos 0 0
-    modeline 658.75 3440 3488 3520 3600 1440 1443 1453 1525 +HSync -VSync
+    render_bit_depth 10
+    mode 3440x1440@119.991Hz
 }
 
 output "HDMI-A-1" {
@@ -59,6 +60,10 @@ input "6899:1:Kingsis_Peripherals_ZOWIE_Gaming_mouse" {
 }
 
 input "1356:3302:Wireless_Controller_Touchpad" {
+    events disabled
+}
+
+input "1356:3302:DualSense_Wireless_Controller_Touchpad" {
     events disabled
 }
 
