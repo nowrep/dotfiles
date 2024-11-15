@@ -100,7 +100,7 @@
             "tooltip": false,
             "interval": 2,
             "hwmon-path": "/tmp/waybar/cpu_temp",
-            "critical-threshold": 85,
+            "critical-threshold": 93,
             "format": " {temperatureC}°C",
             "format-critical": " {temperatureC}°C"
         },

@@ -13,7 +13,7 @@ old_muted=false
 find_sink() {
     sink_id=""
     while [ -z "$sink_id" ]; do
-        sink_id=$(pactl list short sinks  | grep alsa_output.pci-0000_0c_00 | grep analog-stereo | cut -f1)
+        sink_id=$(pactl list short sinks  | grep alsa_output.pci-0000_ | grep analog-stereo | cut -f1)
         sleep 1
     done
     echo "find $sink_id"
