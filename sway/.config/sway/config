@@ -239,7 +239,8 @@ for_window [app_id="ark"] floating enable
 for_window [app_id="trackma-qt"] floating enable
 for_window [app_id="gwenview"] floating enable
 for_window [app_id="mpv"] floating enable
-for_window [app_id="kcalc"] floating enable
+for_window [app_id="Calculator"] floating enable
+for_window [app_id="wlroots"] floating enable
 
 # Opacity
 for_window [app_id="foot"] opacity 0.97
@@ -286,6 +287,7 @@ exec wlsunset -o DP-1 -l 50.08 -L 14.44
 exec wljoywake
 exec /usr/lib/kdeconnectd
 exec /usr/lib/polkit-kde-authentication-agent-1
+exec openrgb --server --profile White
 
 for_window [app_id="foot-scratchpad"] move scratchpad
 exec $term --app-id foot-scratchpad

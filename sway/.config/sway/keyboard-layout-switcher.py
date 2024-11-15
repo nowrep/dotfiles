@@ -13,7 +13,7 @@ us_window_ids = [
     "org.kde.krdc",
     "foot",
     "foot-scratchpad",
-    "assistant", # Qt Assistant
+    "assistant",  # Qt Assistant
 ]
 
 in_game = False
@@ -21,12 +21,14 @@ active_layout_index = -1
 
 ipc = i3ipc.Connection()
 
+
 def altmeta_switch(enable):
     try:
         pid = subprocess.check_output(["pidof", "altmeta_switch"])
         os.kill(int(pid), enable and signal.SIGUSR2 or signal.SIGUSR1)
     except:
         return
+
 
 def on_window_focus(ipc, focused):
     focused_id = focused.container.app_id
@@ -39,7 +41,7 @@ def on_window_focus(ipc, focused):
     if focused_id in us_window_ids:
         layout = US_LAYOUT
 
-    if focused_id == "steam_app_FFXIV" or focused_id == "ffxiv_dx11.exe" or focused_id == "gamescope":
+    if focused_id == "steam_app_FFXIV" or focused_id == "ffxiv_dx11.exe" or focused_id == "gamescope" or focused_id == "steam_proton":
         in_game = True
         altmeta_switch(True)
     elif in_game:
