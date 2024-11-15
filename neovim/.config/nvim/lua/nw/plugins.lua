@@ -205,7 +205,6 @@ return require('packer').startup(function(use)
             vim.api.nvim_set_keymap('n', '<Leader>u', ':MundoToggle<CR>', { noremap = true, silent = true })
         end
     }
-    use 'wakatime/vim-wakatime'
     use { 'vimwiki/vimwiki',
         config = function()
             vim.g.vimwiki_list = { { path = '~/.config/nvim/vimwiki' } }
@@ -229,29 +228,77 @@ return require('packer').startup(function(use)
         end
     }
 
-    use { 'junegunn/seoul256.vim',
-        config = function()
-            vim.opt.background = 'dark'
-            vim.cmd('colorscheme seoul256')
-            -- Transparent background
-            vim.cmd('hi Normal guibg=none ctermbg=none')
-            vim.cmd('hi NonText guibg=none ctermbg=none')
-            vim.cmd('hi LineNr guibg=none ctermbg=none')
-            vim.cmd('hi VertSplit guibg=none ctermbg=none')
-            vim.cmd('hi SignColumn guibg=none ctermbg=none')
-            vim.cmd('hi GitGutterAdd guibg=none ctermbg=none')
-            vim.cmd('hi GitGutterChange guibg=none ctermbg=none')
-            vim.cmd('hi GitGutterDelete guibg=none ctermbg=none')
-            vim.cmd('hi GitGutterChangeDelete guibg=none ctermbg=none')
-        end
-    }
-
-    -- use { 'shaunsingh/seoul256.nvim',
+    -- use { 'junegunn/seoul256.vim',
     --     config = function()
-    --         vim.g.seoul256_disable_background = true
-    --         require('seoul256').set()
+    --         vim.opt.background = 'dark'
+    --         vim.cmd('colorscheme seoul256')
+    --         -- Transparent background
+    --         vim.cmd('hi Normal guibg=none ctermbg=none')
+    --         vim.cmd('hi NonText guibg=none ctermbg=none')
+    --         vim.cmd('hi LineNr guibg=none ctermbg=none')
+    --         vim.cmd('hi VertSplit guibg=none ctermbg=none')
+    --         vim.cmd('hi SignColumn guibg=none ctermbg=none')
+    --         vim.cmd('hi GitGutterAdd guibg=none ctermbg=none')
+    --         vim.cmd('hi GitGutterChange guibg=none ctermbg=none')
+    --         vim.cmd('hi GitGutterDelete guibg=none ctermbg=none')
+    --         vim.cmd('hi GitGutterChangeDelete guibg=none ctermbg=none')
     --     end
     -- }
+
+     -- use { 'shaunsingh/seoul256.nvim',
+     --     config = function()
+     --         vim.g.seoul256_italic_comments = true
+     --         vim.g.seoul256_italic_keywords = false
+     --         vim.g.seoul256_italic_functions = false
+     --         vim.g.seoul256_italic_variables = false
+     --         vim.g.seoul256_contrast = true
+     --         vim.g.seoul256_borders = true
+     --         vim.g.seoul256_disable_background = true
+     --         vim.g.seoul256_hl_current_line = true
+     --         require('seoul256')
+     --         vim.cmd.hi 'WinSeparator guifg=#383838 guibg=none ctermbg=none'
+     --     end
+     -- }
+
+     -- use { 'EdenEast/nightfox.nvim',
+     --     config = function()
+     --         require('nightfox').setup({
+     --             options = {
+     --                 transparent = true,
+     --             }
+     --         })
+     --         vim.cmd('colorscheme nightfox')
+     --         -- vim.cmd.hi 'WinSeparator guifg=#383838 guibg=none ctermbg=none'
+     --     end
+     -- }
+
+     use { 'rebelot/kanagawa.nvim',
+         config = function()
+             require('kanagawa').setup({
+                 transparent = true,
+                 keywordStyle = { italic = false },
+                 colors = {
+                     theme = {
+                         all = {
+                             ui = {
+                                 bg_gutter = "none"
+                             }
+                         }
+                     }
+                 },
+                 overrides = function(colors)
+                     local theme = colors.theme
+                     return {
+                         Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },
+                         PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+                         PmenuSbar = { bg = theme.ui.bg_m1 },
+                         PmenuThumb = { bg = theme.ui.bg_p2 },
+                     }
+                 end,
+             })
+             vim.cmd('colorscheme kanagawa')
+         end
+     }
 
     -- use { 'kyazdani42/nvim-tree.lua',
     --     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
@@ -287,7 +334,7 @@ return require('packer').startup(function(use)
 
             local on_attach = function(client, bufnr)
                 local opts = { noremap = true, silent = true }
-                vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+                -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
                 vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', ':Lspsaga hover_doc<CR>', opts)
                 vim.api.nvim_buf_set_keymap(bufnr, 'n', '<F2>', ':lua vim.lsp.buf.definition()<CR>', opts)
                 -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<F2>', ':Lspsaga lsp_finder<CR>', opts)
@@ -349,18 +396,21 @@ return require('packer').startup(function(use)
         end
     }
 
-    use { 'tami5/lspsaga.nvim',
-        branch = 'nvim51',
+    use { 'nvimdev/lspsaga.nvim',
+        after = 'nvim-lspconfig',
         config = function()
-            require 'lspsaga'.init_lsp_saga {
-                error_sign = '',
-                warn_sign = '',
-                hint_sign = '',
-                infor_sign = '',
-                code_action_prompt = {
-                    sign = false
-                }
-            }
+            require 'lspsaga'.setup({
+                symbol_in_winbar = {
+                    enable = false,
+                },
+                -- error_sign = '',
+                -- warn_sign = '',
+                -- hint_sign = '',
+                -- infor_sign = '',
+                -- code_action_prompt = {
+                --     sign = false
+                -- }
+            })
         end
     }
 
@@ -478,20 +528,18 @@ return require('packer').startup(function(use)
         end
     }
 
-    -- use { 'nvim-treesitter/nvim-treesitter',
-    --     run = ':TSUpdate',
-    --     config = function()
-    --         require'nvim-treesitter.configs'.setup {
-    --             ensure_installed = 'maintained',
-    --             highlight = {
-    --                 enable = true,
-    --                 additional_vim_regex_highlighting = false
-    --             }
-    --         }
-    --     end
-    -- }
+    use { 'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate',
+        config = function()
+            require'nvim-treesitter.configs'.setup {
+                ensure_installed = {'c', 'cpp', 'lua', 'vim', 'vimdoc', 'python'},
+                highlight = {
+                    enable = true,
+                    additional_vim_regex_highlighting = false
+                }
+            }
+        end
+    }
 
-    -- Games
-    use { 'mattn/flappyvird-vim', cmd = { 'FlappyVird' } }
-    use { 'johngrib/vim-game-code-break', cmd = { 'VimGameCodeBreak' } }
+    use { 'rcarriga/nvim-notify' }
 end)
