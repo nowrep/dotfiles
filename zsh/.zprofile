@@ -14,6 +14,7 @@ export NO_AT_BRIDGE=1
 
 # WINE!
 export WINEDLLOVERRIDES=winemenubuilder.exe=d
+export WINEDEBUG=-all
 
 # Python
 export PYTHONPYCACHEPREFIX=/tmp/cpython
@@ -21,7 +22,7 @@ export PYTHONPYCACHEPREFIX=/tmp/cpython
 # AMD
 export AMD_VULKAN_ICD=RADV
 export MESA_DISK_CACHE_SINGLE_FILE=1
-export RADV_PERFTEST=video_decode
+export RADV_PERFTEST=video_decode,video_encode
 export VKD3D_CONFIG=dxr,dxr11
 # export AMD_DEBUG=useaco
 
