@@ -15,7 +15,7 @@ function precmd() {
     ZSH_THEME_GIT_PROMPT_SUFFIX=")"
     ZSH_THEME_GIT_PROMPT_DIRTY=" *"
 
-    local gitsize=$(git_prompt_info | wc -c)
+    local gitsize=$(_omz_git_prompt_info | wc -c)
     local promptsize=${#${(%):-%n@%m---:--:---}}
     local pwdsize=${#${(%):-%~}}
 
