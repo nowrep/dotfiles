@@ -54,7 +54,14 @@ volume_notify() {
 recording_indicator() {
     has_mic=$(pactl list sources short | grep -v .monitor)
     muted=$(pactl get-source-mute @DEFAULT_SOURCE@ | cut -d' ' -f2)
-    led=$(echo /sys/devices/pci0000:00/*/*/usb?/*/*/*/000?:FEED:980C.000?/input/input*/input*::scrolllock/brightness | cut -d' ' -f1)
+
+    for input in /sys/class/leds/input*::scrolllock; do
+        if [ "$(cat $input/device/name)" = "TMK. FC980C Alt Controller" ]; then
+            led="${input}/brightness"
+            break
+        fi
+    done
+
     if [ -z "$has_mic" -o "$muted" = "yes" ]; then
         $HOME/.config/sway/setled 0 $led
     else
