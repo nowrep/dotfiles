@@ -7,7 +7,7 @@ import signal
 
 CZ_LAYOUT = 1
 US_LAYOUT = 0
-KEYBOARD_ID = "65261:38924:TMK._FC980C_Alt_Controller"
+KEYBOARD_ID = "type:keyboard"
 
 us_window_ids = [
     "org.kde.krdc",
@@ -32,8 +32,10 @@ def altmeta_switch(enable):
 
 def on_window_focus(ipc, focused):
     focused_id = focused.container.app_id
-    if focused_id is None: focused_id = focused.container.window_class
-    if focused_id is None: return
+    if focused_id is None:
+        focused_id = focused.container.window_class
+    if focused_id is None:
+        return
 
     global in_game, active_layout_index
 
