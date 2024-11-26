@@ -4,21 +4,6 @@ return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
-    -- use { 'hoob3rt/lualine.nvim',
-    --     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    --     config = function()
-    --         require 'lualine'.setup {
-    --             options = {
-    --                 theme = 'jellybeans'
-    --             },
-    --             sections = {
-    --                 lualine_c = { 'diagnostics', sources = { 'nvim_lsp' } }
-    --             },
-    --             extensions = { 'nvim-tree', 'quickfix' }
-    --         }
-    --     end
-    -- }
-
     use 'vim-airline/vim-airline-themes'
     use { 'vim-airline/vim-airline',
         config = function()
@@ -39,23 +24,6 @@ return require('packer').startup(function(use)
             vim.g['airline#extensions#nvimlsp#warning_symbol'] = ''
         end
     }
-
-    -- use { 'akinsho/nvim-bufferline.lua',
-    --     requires = 'kyazdani42/nvim-web-devicons',
-    --     config = function()
-    --         require("bufferline").setup({
-    --             options = {
-    --                 show_close_icon = false,
-    --                 show_buffer_close_icons = false
-    --             },
-    --             highlights = {
-    --                 buffer_selected = {
-    --                     gui = "bold"
-    --                 },
-    --             }
-    --         })
-    --     end
-    -- }
 
     use { 'sheerun/vim-polyglot',
         config = function()
@@ -228,50 +196,6 @@ return require('packer').startup(function(use)
         end
     }
 
-    -- use { 'junegunn/seoul256.vim',
-    --     config = function()
-    --         vim.opt.background = 'dark'
-    --         vim.cmd('colorscheme seoul256')
-    --         -- Transparent background
-    --         vim.cmd('hi Normal guibg=none ctermbg=none')
-    --         vim.cmd('hi NonText guibg=none ctermbg=none')
-    --         vim.cmd('hi LineNr guibg=none ctermbg=none')
-    --         vim.cmd('hi VertSplit guibg=none ctermbg=none')
-    --         vim.cmd('hi SignColumn guibg=none ctermbg=none')
-    --         vim.cmd('hi GitGutterAdd guibg=none ctermbg=none')
-    --         vim.cmd('hi GitGutterChange guibg=none ctermbg=none')
-    --         vim.cmd('hi GitGutterDelete guibg=none ctermbg=none')
-    --         vim.cmd('hi GitGutterChangeDelete guibg=none ctermbg=none')
-    --     end
-    -- }
-
-     -- use { 'shaunsingh/seoul256.nvim',
-     --     config = function()
-     --         vim.g.seoul256_italic_comments = true
-     --         vim.g.seoul256_italic_keywords = false
-     --         vim.g.seoul256_italic_functions = false
-     --         vim.g.seoul256_italic_variables = false
-     --         vim.g.seoul256_contrast = true
-     --         vim.g.seoul256_borders = true
-     --         vim.g.seoul256_disable_background = true
-     --         vim.g.seoul256_hl_current_line = true
-     --         require('seoul256')
-     --         vim.cmd.hi 'WinSeparator guifg=#383838 guibg=none ctermbg=none'
-     --     end
-     -- }
-
-     -- use { 'EdenEast/nightfox.nvim',
-     --     config = function()
-     --         require('nightfox').setup({
-     --             options = {
-     --                 transparent = true,
-     --             }
-     --         })
-     --         vim.cmd('colorscheme nightfox')
-     --         -- vim.cmd.hi 'WinSeparator guifg=#383838 guibg=none ctermbg=none'
-     --     end
-     -- }
-
      use { 'rebelot/kanagawa.nvim',
          config = function()
              require('kanagawa').setup({
@@ -300,23 +224,6 @@ return require('packer').startup(function(use)
          end
      }
 
-    -- use { 'kyazdani42/nvim-tree.lua',
-    --     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    --     cmd = { 'NvimTreeToggle' },
-    --     keys = { '<Leader>t' },
-    --     config = function()
-    --         vim.g.nvim_tree_width = 20
-    --         vim.g.nvim_tree_auto_close = 1
-    --         vim.g.nvim_tree_show_icons = {
-    --             git = 1,
-    --             folders = 1,
-    --             files = 1,
-    --             folder_arrows = 0
-    --         }
-    --         vim.api.nvim_set_keymap('n', '<Leader>t', ':NvimTreeToggle<CR>', { noremap = true })
-    --     end
-    -- }
-
     use { 'scrooloose/nerdtree',
         requires = { 'Xuyuanp/nerdtree-git-plugin', opt = true },
         cmd = {'NERDTreeToggle'},
@@ -332,6 +239,12 @@ return require('packer').startup(function(use)
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+            local on_init = function(client, initialization_result)
+                if client.server_capabilities then
+                    client.server_capabilities.semanticTokensProvider = false
+                end
+            end
+
             local on_attach = function(client, bufnr)
                 local opts = { noremap = true, silent = true }
                 -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -345,8 +258,10 @@ return require('packer').startup(function(use)
             local lspconfig = require 'lspconfig'
             -- C/C++
             lspconfig.ccls.setup {
+                on_init = on_init,
                 on_attach = on_attach,
                 init_options = {
+                    compilationDatabaseDirectory = 'build',
                     cache = {
                         directory = '/tmp/ccls'
                     }
