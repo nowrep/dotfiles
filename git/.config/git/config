@@ -22,9 +22,16 @@ hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 up = pull --rebase --autostash
 edit = !sh -c 'git rebase --interactive "$(git log --pretty=format:%h | head -n$0 | tail -1)^"'
 fixes = show -s --pretty='format:Fixes: %h (\"%s\")'
-
-[commit]
-gpgsign = true
+co = checkout
+r = rebase
+rc = rebase --continue
+ra = rebase --abort
+b = branch
+bg = bisect good
+bb = bisect bad
+a = commit --amend
+d = diff @
+s = show
 
 [pull]
 rebase = true
