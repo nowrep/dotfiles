@@ -16,7 +16,7 @@ find_sink() {
         sink_id=$(pactl list short sinks  | grep alsa_output.pci-0000_ | grep analog-stereo | cut -f1)
         sleep 1
     done
-    echo "find $sink_id"
+    echo $sink_id > /tmp/pa_default_sink
 }
 
 volume_notify() {

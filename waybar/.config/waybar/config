@@ -80,8 +80,8 @@
             "tooltip": false,
             "return-type": "json",
             "exec": "$HOME/.config/waybar/pulseaudio-notifier.sh",
-            "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
-            "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
+            "on-scroll-up": "pactl set-sink-volume $(cat /tmp/pa_default_sink) +5%",
+            "on-scroll-down": "pactl set-sink-volume $(cat /tmp/pa_default_sink) -5%",
             "format": "{icon} {percentage}%",
             "format-icons": ["", "", ""]
         },
